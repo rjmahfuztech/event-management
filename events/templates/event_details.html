@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
+</head>
+<body>
+    <section class="max-w-[1400px] mx-auto mt-10">
+        <div class="grid gap-2 md:gap-4 grid-cols-1 md:grid-cols-3">
+            <div class="md:col-span-2">
+                <div class="flex gap-1 items-center">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5 text-fuchsia-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+                          </svg>                          
+                    </div>
+                    <h3 class="text-lg text-orange-500 font-semibold">Featured Event Details</h3>
+                </div>
+                <h1 class="text-3xl font-bold mb-3">Event Details Title</h1>
+                <img class="w-full rounded-md" src="{% static "images/details.jpeg" %}" alt="Event Details Image">
+                <p class="mt-3 md:mt-5 text-lg block md:hidden">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita atque itaque perspiciatis consequuntur, delectus deleniti repellendus similique commodi! Voluptatem fugiat mollitia animi nostrum esse minima numquam totam vel, aliquid, tempore inventore amet dolorum doloremque corporis repudiandae natus qui est sunt eligendi ratione dignissimos iure placeat accusantium repellendus. Veniam, maxime reiciendis?
+                </p>
+                <div class="flex gap-1 md:gap-3 items-center mt-3 md:mt-5">
+                    <div class="flex gap-1 md:gap-2 items-center bg-slate-100 p-1 md:p-2 w-52">
+                        <div class="w-10 h-10 rounded-full bg-orange-400 flex justify-center items-center text-white" >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xs md:text-sm font-semibold text-gray-600">Date</h4>
+                            <h3 class="text-sm md:text-lg font-bold">15 AUGUST 2002</h3>
+                        </div>                      
+                    </div>
+                    <div class="flex gap-1 md:gap-2 items-center bg-slate-100 p-1 md:p-2 w-52">
+                        <div class="w-10 h-10 rounded-full bg-orange-400 flex justify-center items-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+                            </svg> 
+                        </div>                                          
+                        <div>
+                            <h4 class="text-xs md:text-sm font-semibold text-gray-600">Category</h4>
+                            <h3 class="text-sm md:text-lg font-bold">DALAS HOTEL</h3>
+                        </div>                      
+                    </div>
+                </div>
+                <p class="mt-3 md:mt-5 text-lg hidden md:block">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita atque itaque perspiciatis consequuntur, delectus deleniti repellendus similique commodi! Voluptatem fugiat mollitia animi nostrum esse minima numquam totam vel, aliquid, tempore inventore amet dolorum doloremque corporis repudiandae natus qui est sunt eligendi ratione dignissimos iure placeat accusantium repellendus. Veniam, maxime reiciendis?
+                </p>
+            </div>
+            <div class="mt-0 md:mt-16 pt-0 md:pt-2">
+                <div class="flex gap-2 items-center bg-slate-100 p-2">
+                    <div class="w-10 h-10 rounded-full bg-orange-400 flex justify-center items-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                          </svg>                          
+                    </div>
+                    <div>
+                        <h4 class="text-sm md:text-lg font-semibold text-gray-600">Location</h4>
+                        <h3 class="text-lg md:text-xl font-bold">DHAKA, BANGLADESH</h3>
+                    </div>
+                </div>
+                <div class="flex gap-2 items-center bg-slate-100 p-2 mt-3">
+                    <div class="w-10 h-10 rounded-full bg-orange-400 flex justify-center items-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                          </svg>                                                   
+                    </div>
+                    <div>
+                        <h4 class="text-sm md:text-lg font-semibold text-gray-600">Time</h4>
+                        <h3 class="text-lg md:text-xl font-bold">12.00</h3>
+                    </div>
+                </div>
+                {% comment %} Participants  {% endcomment %}
+                <div class="bg-slate-100 p-2 mt-3">
+                    <h3 class="text-lg md:text-xl font-bold text-center border-b-4 border-indigo-500 mb-2">Participant in: 01</h3>
+                    <div class="flex gap-2 items-center mt-2 md:mt-3">
+                        <div class="w-10 h-10 rounded-full bg-orange-400 flex justify-center items-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-7">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                              </svg>                                                                                 
+                        </div>
+                        <h3 class="text-lg md:text-xl font-bold">Mahfuz Islam</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
