@@ -9,3 +9,6 @@ def event_details(request):
 
 def dashboard(request):
     return render(request, "dashboard/dashboard.html")
+
+def add_event(request):
+    pass
