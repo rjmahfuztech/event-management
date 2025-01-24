@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from events.forms import EventModelForm
 
 # Create your views here.
 def home(request):
@@ -11,4 +12,10 @@ def dashboard(request):
     return render(request, "dashboard/dashboard.html")
 
 def add_event(request):
-    pass
+    event_form = EventModelForm()
+
+    context = {
+        "event_form": event_form
+    }
+
+    return render(request, "event_form.html", context)
