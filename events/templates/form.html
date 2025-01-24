@@ -1,0 +1,22 @@
+{% extends "home.html" %}
+
+{% block forms %}
+<section class="max-w-[800px] mx-auto mt-10">
+    {% comment %} <input type="text" class="border-2 border-gray-600 p-2 rounded-md w-full space-y-2 mr-2"> {% endcomment %}
+    {% comment %} <textarea name="ok" class="resize-none" id=""></textarea> {% endcomment %}
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="px-2 py-1 text-center {% if message.tags == 'success' %}bg-green-400{% endif %} ">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        {{event_form.as_p}}
+        {{participant_form.as_p}}
+        {{category_form.as_p}}
+        <button class="w-80 p-3 font-bold text-white bg-orange-400 mt-3 mb-5" type="submit">Submit</button>
+    </form>
+</section>
+{% endblock forms %}
