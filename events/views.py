@@ -6,3 +6,6 @@ def home(request):
 
 def event_details(request):
     return render(request, "event_details.html")
+
+def dashboard(request):
+    return render(request, "dashboard/dashboard.html")
