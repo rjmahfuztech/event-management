@@ -1,0 +1,68 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block header %}
+{% comment %} bg-[url({% static 'images/bg1.jpg' %})] w-screen bg-cover bg-center {% endcomment %}
+<header class="bg-[url({% static 'images/bg1.jpg' %})] w-screen bg-cover bg-center pt-20">
+    {% comment %} Banner section {% endcomment %}
+    <section class="max-w-[1400px] p-3 mx-auto grid gap-4 grid-cols md:grid-cols-2 items-center justify-center">
+      <div class="text-center md:text-left">
+        <h3 class="text-xl md:text-2xl font-semibold text-white">WELCOME TO,</h3>
+        <h1 class="text-3xl md:text-6xl font-bold text-white">Effortless Event<br>Management</h1>
+      </div>
+      <div class="flex justify-center">
+        <img class="w-80 lg:w-96 rounded-lg" src="{% static 'images/event-img.jpeg' %}" alt="Event Image">
+      </div>
+    </section>
+</header>
+{% endblock header %}
+
+{% block event %}
+{% comment %} Search Section {% endcomment %}
+<section class="bg-amber-500 shadow-md rounded-md p-5 md:p-9 md:pb-14 relative -top-5 md:static md:top-0 md:-mt-9">
+    <h2 class="text-2xl text-center md:text-left md:text-4xl mb-3 md:mb-0 text-white font-semibold md:relative left-20">SEARCH THE BEST EVENT!</h2>
+    <h2 class="text-xl text-center md:text-left mb-3 md:mb-0 text-white font-semibold md:relative left-20">Search events by name or category or both or Start and End date</h2>
+    <form class="md:flex gap-3 md:px-20 justify-between md:pt-14" action="{% url "event-info" %}" method="GET">
+        {% csrf_token %}
+        <input class="w-full p-2 md:p-3 rounded-md" placeholder="Search event name.." name="name" type="text">
+        <select class="w-full p-2 md:p-3 mt-3 md:mt-0 rounded-md" name="category">
+            <option value="all">--Choose Category--</option>
+            {% for category in categories %}
+                <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="w-full mt-3 md:mt-0 p-2 md:p-3 bg-stone-950 text-white font-semibold">Search</button>
+    </form>
+    {% comment %} for date filter  {% endcomment %}
+
+    <form class="md:flex gap-3 md:px-20 justify-between md:pt-4" action="{% url "event-info" %}" method="GET">
+        {% csrf_token %}
+        <input class="w-full p-2 md:p-3 mt-2 rounded-md" type="date" required name="start-date">
+        <input class="w-full p-2 md:p-3 mt-2 rounded-md" type="date" required name="end-date">
+        <button type="submit" class="w-full mt-3 md:mt-0 p-2 md:p-3 bg-stone-950 text-white font-semibold">Search</button>
+    </form>
+</section>
+{% comment %} All Event {% endcomment %}
+<section class="grid gird-cols lg:grid-cols-2 gap-4 mt-10">
+    {% if event_data %}
+        {% for event in event_data %}
+            <div class="shadow-md bg-slate-50 rounded-lg p-3 md:flex gap-4 items-center">
+                <img src="{% static 'images/event-img.jpeg' %}" alt="Image" class="w-80 sm:w-40 mx-auto sm:mx-0 rounded-md">
+                <div>
+                    <h3 class="text-xl md:text-3xl text-orange-600 font-semibold">{{event.name}}</h3>
+                    <p class="text-black">{{event.description}}</p>
+                    <h3 class="text-sm md:text-xl text-black font-bold">Location: {{event.location}}</h3>
+                    <div class="flex gap-2 justify-around items-center mt-3">
+                    <h3 class="text-sm md:text-xl text-center text-black font-bold"><span class="text-sm border-b-4 border-indigo-500 rounded">TOTAL PARTICIPANT</span>:<br>{{event.participant.count}}</h3>
+                    <a href="{% url "details" event.id %}" class="bg-black text-white py-2 px-3 font-semibold hover:bg-orange-400">SEE DETAILS</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">Sorry! No data available for the search!!</h2>
+        <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">Sorry! No data available for the search!!</h2>
+    {% endif %}
+</section>
+
+{% endblock event %}

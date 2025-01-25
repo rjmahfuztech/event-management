@@ -1,4 +1,4 @@
-{% extends "home.html" %}
+{% extends "dashboard/manage_dashboard.html" %}
 
 {% block forms %}
 <section class="max-w-[800px] mx-auto mt-10">
@@ -7,7 +7,9 @@
     <div>
         {% if messages %}
             {% for message in messages %}
-                <p class="px-2 py-1 text-center {% if message.tags == 'success' %}bg-green-400{% endif %} ">{{message}}</p>
+                <p class="px-2 py-1 text-center {% if message.tags == 'success' %}bg-green-400{% elif message.tags == 'error' %}bg-yellow-500{% endif %}">
+                    {{message}}
+                </p>
             {% endfor %}
         {% endif %}
     </div>
