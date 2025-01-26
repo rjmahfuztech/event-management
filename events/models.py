@@ -18,7 +18,7 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     date = models.DateField()
-    time = models.TimeField(auto_now_add=True)
+    time = models.TimeField()
     location = models.CharField(max_length=300)
     category = models.ForeignKey(
         Category,

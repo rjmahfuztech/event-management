@@ -13,23 +13,25 @@
         <h2 class="max-w-80 mx-auto text-center justify-center border-b-4 border-orange-400 text-lg sm:text-2xl font-bold">Events Scheduled For Today</h2>
         {% if todays_event %}
             <div class="bg-slate-200 text-black mt-5 divide-y divide-blue-200">
-                <div class="grid grid-cols-2 gap-3 md:gap-4 md:grid-cols-4">
+                <div class="grid grid-cols-3 gap-3 md:gap-4 md:grid-cols-5">
                     <h2 class=" p-3 text-center text-lg sm:text-xl font-semibold">Title</h2>
                     <h2 class="p-3 text-center text-lg sm:text-xl font-semibold hidden md:block">Category</h2>
                     <h2 class="p-3 text-center text-lg sm:text-xl font-semibold hidden md:block">Location</h2>
                     <h2 class="p-3 text-center text-lg sm:text-xl font-semibold">Date</h2>
+                    <h2 class="p-3 text-center text-lg sm:text-xl font-semibold">Time</h2>
                 </div>
-                <div class="grid grid-cols-2 gap-3 md:gap-4 md:grid-cols-4">
+                <div class="grid grid-cols-3 gap-3 md:gap-4 md:grid-cols-5">
                     {% for event in todays_event %}
                         <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.name}}</h2>
                         <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.category}}</h2>
                         <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.location}}</h2>
                         <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.date}}</h2>
+                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.time}}</h2>
                     {% endfor %}
                 </div>
             </div>
         {% else %}
-            <h2 class="max-w-80 mx-auto mt-10 text-center justify-center  text-lg sm:text-xl font-bold">No events available for today!!</h2>
+            <h2 class="max-w-80 mx-auto mt-5 sm:mt-10 text-center justify-center  text-lg sm:text-xl font-bold">No events available for today!!</h2>
         {% endif %}
     </section>
     {% comment %} Interactive Stats {% endcomment %}
@@ -46,20 +48,26 @@
             </a>
         </div>
         <div class="bg-slate-50 text-black mt-5 divide-y">
-            <div class="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-4 divide-y">
-                <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Title</h2>
-                <h2 class="p-2 text-center text-sm sm:text-lg font-semibold hidden md:block">Category</h2>
-                <h2 class="p-2 text-center text-sm sm:text-lg font-semibold hidden md:block">Location</h2>
-                <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Date</h2>
-            </div>
-            <div class="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-4">
-                {% for event in events %}
-                    <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.name}}</h2>
-                    <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.category}}</h2>
-                    <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.location}}</h2>
-                    <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.date}}</h2>
-                {% endfor %}
-            </div>
+            {% if events %}
+                <div class="grid grid-cols-3 gap-2 md:gap-4 md:grid-cols-5 divide-y">
+                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Title</h2>
+                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold hidden md:block">Category</h2>
+                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold hidden md:block">Location</h2>
+                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Date</h2>
+                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Time</h2>
+                </div>
+                <div class="grid grid-cols-3 gap-2 md:gap-4 md:grid-cols-5">
+                    {% for event in events %}
+                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.name}}</h2>
+                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.category}}</h2>
+                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.location}}</h2>
+                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.date}}</h2>
+                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.time}}</h2>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h2 class="max-w-80 mx-auto mt-5 sm:mt-10 text-center justify-center  text-lg sm:text-xl font-bold">Sorry! No events available!!</h2>
+            {% endif %}
         </div>
     </section>
 </div>

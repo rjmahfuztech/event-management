@@ -20,11 +20,11 @@ class StyleMixin():
                 field.widget.attrs.update({
                     'class': f'{self.form_style_classes} resize-none',
                     'placeholder': f'Enter {field.label.lower()}',
-                    'row': 4
+                    'row': 3
                 })
             elif isinstance(field.widget, forms.SelectDateWidget):
                 field.widget.attrs.update({
-                    'class': 'border-2 p-2 rounded-md mr-2'
+                    'class': 'border-2 p-1 sm:p-2 rounded-md mr-1 sm:mr-2'
                 })
             elif isinstance(field.widget, forms.CheckboxSelectMultiple):
                 field.widget.attrs.update({
@@ -36,18 +36,23 @@ class StyleMixin():
                 })
             else:
                 field.widget.attrs.update({
-                    'class': self.form_style_classes    
+                    'class': self.form_style_classes
                 })
 
 
 class EventModelForm(StyleMixin,forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['name', 'description', 'date', 'location', 'category', 'participant']
+        fields = ['name', 'description', 'date', 'time', 'location', 'category', 'participant']
         widgets = {
             'date': forms.SelectDateWidget,
             'category': forms.RadioSelect,
-            'participant': forms.CheckboxSelectMultiple
+            'participant': forms.CheckboxSelectMultiple,
+            'time': forms.TimeInput(attrs={
+                    'value': "13:00",
+                    'step': "900",
+                    'type': 'time'
+                })
         }
     
     def __init__(self, *args, **kwargs):

@@ -14,12 +14,13 @@ def events_info(request):
     event_query = prefetch_query
     categories = Category.objects.all()
     # filter data
-    search_name = request.GET.get('name', 'all')
-    choice = request.GET.get('category', 'all')
-    start_date = request.GET.get('start-date', 'all')
-    end_date = request.GET.get('end-date', 'all')
+    get_data  = request.GET
+    search_name = get_data.get('name', 'all')
+    choice = get_data.get('category', 'all')
+    start_date = get_data.get('start-date', 'all')
+    end_date = get_data.get('end-date', 'all')
 
-
+    print(search_name," ", choice, " ", start_date, " ", end_date)
     if search_name != 'all' and choice != 'all':
         event_data = event_query.filter(name__icontains=search_name, category=choice)
     elif start_date != 'all' and end_date != 'all':
