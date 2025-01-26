@@ -20,7 +20,6 @@ def events_info(request):
     start_date = get_data.get('start-date', 'all')
     end_date = get_data.get('end-date', 'all')
 
-    print(search_name," ", choice, " ", start_date, " ", end_date)
     if search_name != 'all' and choice != 'all':
         event_data = event_query.filter(name__icontains=search_name, category=choice)
     elif start_date != 'all' and end_date != 'all':
