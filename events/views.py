@@ -167,7 +167,7 @@ def delete_participant(request,id):
     participant = Participant.objects.get(id=id)
     if request.method == "POST":
         participant.delete()
-        messages.success(request, "Participant Updated Successful!")
+        messages.success(request, "Participant Deleted Successful!")
         return redirect('participant')
     else:
         messages.error(request, 'Opps! Something Went Wrong! Participant Delete Failed!')
