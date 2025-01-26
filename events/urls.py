@@ -3,7 +3,7 @@ from events.views import events_info,event_details,dashboard,add_event,add_parti
 
 
 urlpatterns = [
-    path('event-info/', events_info, name='event-info'),
+    path('', events_info, name='event-info'),
     path('event-details/<int:id>', event_details, name='details'),
     path('dashboard/', dashboard, name='dashboard'),
     path('category/', category, name='category'),
