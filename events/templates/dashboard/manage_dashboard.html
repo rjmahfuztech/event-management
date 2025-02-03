@@ -46,6 +46,11 @@
                 </a>
             </li>
             <li>
+                <a href="{% url "create-group" %}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <span class="flex-1 ms-3 whitespace-nowrap">Create Group</span>
+                </a>
+            </li>
+            <li>
                 <a href="{% url "event-info" %}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
@@ -64,6 +69,7 @@
             {% block event %}{% endblock event %}
             {% block participant %}{% endblock participant %}
             {% block forms %}{% endblock forms %}
+            {% block group %}{% endblock group %}
         </div>
      </div>
 </body>

@@ -4,6 +4,7 @@ from events.models import Event,Category,Participant
 from django.contrib import messages
 from datetime import date
 from django.db.models import Count,Q
+from django.contrib.auth.models import User
 
 
 ## Common Query
@@ -126,45 +127,45 @@ def delete_event(request, id):
 
 # get participant
 def participant(request):
-    participants = Participant.objects.all()
+    participants = User.objects.all()
     context={
         'participants': participants    
     }
     return render(request, "participant.html", context)
 
 # Participant Operation
-def add_participant(request):
-    participant_form = ParticipantModelForm()
+# def add_participant(request):
+#     participant_form = ParticipantModelForm()
 
-    if request.method == "POST":
-        participant_form = ParticipantModelForm(request.POST)
-        if participant_form.is_valid():
-            participant_form.save()
-            messages.success(request, 'Participant Added Successful!')
-            return redirect('add-participant')
+#     if request.method == "POST":
+#         participant_form = ParticipantModelForm(request.POST)
+#         if participant_form.is_valid():
+#             participant_form.save()
+#             messages.success(request, 'Participant Added Successful!')
+#             return redirect('add-participant')
 
-    context = {
-        "participant_form": participant_form
-    }
-    return render(request, "form.html", context)
+#     context = {
+#         "participant_form": participant_form
+#     }
+#     return render(request, "form.html", context)
 
-def update_participant(request,id):
-    participant = Participant.objects.get(id=id)
-    participant_form = ParticipantModelForm(instance=participant)
+# def update_participant(request,id):
+#     participant = Participant.objects.get(id=id)
+#     participant_form = ParticipantModelForm(instance=participant)
 
-    if request.method == "POST":
-        participant_form = ParticipantModelForm(request.POST, instance=participant)
+#     if request.method == "POST":
+#         participant_form = ParticipantModelForm(request.POST, instance=participant)
 
-        if participant_form.is_valid():
-            participant_form.save()
-            messages.success(request, "Participant Updated Successful!")
-            return redirect('update-participant', id)
+#         if participant_form.is_valid():
+#             participant_form.save()
+#             messages.success(request, "Participant Updated Successful!")
+#             return redirect('update-participant', id)
     
-    context = {'participant_form': participant_form}
-    return render(request, "form.html", context)
+#     context = {'participant_form': participant_form}
+#     return render(request, "form.html", context)
 
 def delete_participant(request,id):
-    participant = Participant.objects.get(id=id)
+    participant = User.objects.get(id=id)
     if request.method == "POST":
         participant.delete()
         messages.success(request, "Participant Deleted Successful!")

@@ -2,7 +2,7 @@ from django import forms
 from events.models import Event,Participant,Category
 
 class StyleMixin():
-    form_style_classes = 'border-2 border-gray-600 p-2 rounded-md w-full'
+    form_style_classes = 'border border-gray-500 p-2 rounded-md w-full'
 
     def formFieldStyle(self):
         for field_key, field in self.fields.items():
@@ -16,6 +16,11 @@ class StyleMixin():
                     'class': self.form_style_classes,
                     'placeholder': f'Enter {field.label.lower()}'
                 })
+            elif isinstance(field.widget, forms.PasswordInput):
+                field.widget.attrs.update({
+                    'class': self.form_style_classes,
+                    'placeholder': f'Enter password'
+                })
             elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': f'{self.form_style_classes} resize-none',
@@ -24,7 +29,7 @@ class StyleMixin():
                 })
             elif isinstance(field.widget, forms.SelectDateWidget):
                 field.widget.attrs.update({
-                    'class': 'border-2 p-1 sm:p-2 rounded-md mr-1 sm:mr-2'
+                    'class': 'border p-1 sm:p-2 rounded-md mr-1 sm:mr-2'
                 })
             elif isinstance(field.widget, forms.CheckboxSelectMultiple):
                 field.widget.attrs.update({
@@ -38,6 +43,10 @@ class StyleMixin():
                 field.widget.attrs.update({
                     'class': self.form_style_classes
                 })
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args,**kwargs)
+        self.formFieldStyle()
 
 
 class EventModelForm(StyleMixin,forms.ModelForm):
@@ -55,24 +64,14 @@ class EventModelForm(StyleMixin,forms.ModelForm):
                 })
         }
     
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args,**kwargs)
-        self.formFieldStyle()
 
 class ParticipantModelForm(StyleMixin,forms.ModelForm):
     class Meta:
         model = Participant
         fields = ['name', 'email']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args,**kwargs)
-        self.formFieldStyle()
 
 class CategoryModelForm(StyleMixin,forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name', 'description']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args,**kwargs)
-        self.formFieldStyle()
