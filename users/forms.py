@@ -1,7 +1,8 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission, Group
 from events.forms import StyleMixin
 from django import forms
 import re
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class RegistrationForm(StyleMixin,forms.ModelForm):
@@ -41,4 +42,19 @@ class RegistrationForm(StyleMixin,forms.ModelForm):
         return cleaned_data
 
 
-        
+class LoginForm(StyleMixin, AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class CreateGroupForm(StyleMixin, forms.ModelForm):
+    permissions = forms.ModelMultipleChoiceField(
+        queryset= Permission.objects.all(),
+        required= False,
+        label= 'Assign Permission',
+        widget= forms.CheckboxSelectMultiple
+    )
+
+    class Meta:
+        model = Group
+        fields = ['name', 'permissions']

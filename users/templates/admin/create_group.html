@@ -1,0 +1,42 @@
+{% extends "dashboard/manage_dashboard.html" %}
+
+{% block group %}
+<div class="max-w-[700px] mx-auto">
+    <div class="flex justify-center">
+        <h1 class="text-2xl md:text-3xl inline-block font-bold mt-3 mb-5 border-b-2 rounded-md border-slate-700">Create A New Group</h1>
+    </div>
+    <div>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="px-2 py-3 rounded-md text-white font-semibold text-center {% if message.tags == 'success' %}bg-green-400{% elif message.tags == 'error' %} bg-yellow-500{% endif %}">
+                    {{message}}
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form class="mt-2" method="POST">
+        {% csrf_token %}
+        <button type="button" id="select-all" class="px-2 py-1 cursor-pointer rounded-md bg-black text-white">Select All</button>
+        <button type="button" id="deselect-all" class="px-2 py-1 cursor-pointer rounded-md bg-black text-white">Deselect All</button>
+        {{form}}
+        <button class="bg-black text-white font-semibold max-w-96 py-2 px-3 rounded-md hover:bg-gray-600 my-3" type="submit">Create Group</button>
+    </form>
+</div>
+
+<script>
+    {% comment %} Select All  {% endcomment %}
+    document.getElementById('select-all').addEventListener('click', () => {
+        let checkBoxes = document.querySelectorAll('input[name="permissions"]');
+        checkBoxes.forEach((checkbox) => {
+            checkbox.checked = true;
+        });
+    });
+    {% comment %} Deselect All  {% endcomment %}
+    document.getElementById('deselect-all').addEventListener('click', () => {
+        let checkBoxes = document.querySelectorAll('input[name="permissions"]');
+        checkBoxes.forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+    });
+</script>
+{% endblock group %}
