@@ -51,7 +51,7 @@
 </section>
 {% comment %} All Event {% endcomment %}
 <section class="grid gird-cols lg:grid-cols-2 gap-4 mt-10">
-    {% if event_data %}
+    {% if event_data.exists %}
         {% for event in event_data %}
             <div class="shadow-md bg-slate-50 rounded-lg p-3 md:flex gap-4 items-center">
                 {% if event.image %}

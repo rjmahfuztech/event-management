@@ -54,7 +54,7 @@ def event_details(request, id):
 
 @login_required
 def dashboard(request):
-    events_query = select_query.all()
+    events_query = select_query
     type = request.GET.get('type', 'all')
 
     # filtering by date
@@ -148,21 +148,22 @@ def participant(request):
 
 @login_required
 def join_in_event(request, id):
-    event = Event.objects.get(id=id)
+    event = Event.objects.prefetch_related('participant').get(id=id)
     is_added = event.participant.filter(id=request.user.id).exists()
     if is_added == False:
         event.participant.add(request.user)
         messages.success(request, f"You are successfully booked this `{event.name}` event.")
         return redirect('my-event')
     else:
-        messages.error(request, f"You are Already booked this `{event.name}` event.")
+        messages.error(request, f"Alert! You are Already booked this `{event.name}` event.")
         return redirect('my-event')
     
 @login_required
 def user_booked_events(request):
-    return render(request, "user_booked_event.html")
+    user = User.objects.get(id=request.user.id)
+    user_events = Event.objects.filter(participant=user).select_related('category')
+    return render(request, "user_booked_event.html", {'user_events': user_events})
         
-
 
 @user_passes_test(is_admin, login_url='no-permission')
 def delete_participant(request,id):
