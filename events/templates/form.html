@@ -11,7 +11,7 @@
             {% endfor %}
         {% endif %}
     </div>
-    <form method="POST">
+    <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
         {{event_form.as_p}}
         {{participant_form.as_p}}

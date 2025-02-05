@@ -52,11 +52,10 @@ class StyleMixin():
 class EventModelForm(StyleMixin,forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['name', 'description', 'date', 'time', 'location', 'category', 'participant']
+        fields = ['name', 'description', 'date', 'time', 'location', 'category', 'image']
         widgets = {
             'date': forms.SelectDateWidget,
             'category': forms.RadioSelect,
-            'participant': forms.CheckboxSelectMultiple,
             'time': forms.TimeInput(attrs={
                     'value': "13:00",
                     'step': "900",

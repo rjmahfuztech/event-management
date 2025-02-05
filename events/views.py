@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from events.forms import EventModelForm,CategoryModelForm
-from events.models import Event,Category,Participant
+from events.models import Event,Category
 from django.contrib import messages
 from datetime import date
 from django.db.models import Count,Q
@@ -69,7 +69,7 @@ def dashboard(request):
 
 
     # counting
-    total_participant = Participant.objects.all().count()
+    total_participant = User.objects.all().count()
     count = Event.objects.aggregate(
         total_event=Count('id'),
         total_upcoming=Count('id', filter=Q(date__gt=date.today())),
@@ -99,7 +99,7 @@ def add_event(request):
     event_form = EventModelForm()
 
     if request.method == "POST":
-        event_form = EventModelForm(request.POST)
+        event_form = EventModelForm(request.POST, request.FILES)
         if event_form.is_valid():
             event_form.save()
             messages.success(request, 'Event Added Successful!')
@@ -145,6 +145,24 @@ def participant(request):
         'participants': participants    
     }
     return render(request, "participant.html", context)
+
+@login_required
+def join_in_event(request, id):
+    event = Event.objects.get(id=id)
+    is_added = event.participant.filter(id=request.user.id).exists()
+    if is_added == False:
+        event.participant.add(request.user)
+        messages.success(request, f"You are successfully booked this `{event.name}` event.")
+        return redirect('my-event')
+    else:
+        messages.error(request, f"You are Already booked this `{event.name}` event.")
+        return redirect('my-event')
+    
+@login_required
+def user_booked_events(request):
+    return render(request, "user_booked_event.html")
+        
+
 
 @user_passes_test(is_admin, login_url='no-permission')
 def delete_participant(request,id):

@@ -54,14 +54,21 @@
     {% if event_data %}
         {% for event in event_data %}
             <div class="shadow-md bg-slate-50 rounded-lg p-3 md:flex gap-4 items-center">
-                <img src="{% static 'images/event-img.jpeg' %}" alt="Image" class="w-80 sm:w-40 mx-auto sm:mx-0 rounded-md">
+                {% if event.image %}
+                    <img src="{{event.image.url}}" alt="Image" class="w-80 h-60 sm:w-40 mx-auto sm:mx-0 rounded-md">
+                {% else %}
+                    <img src="{% static 'images/event-img.jpeg' %}" alt="Image" class="w-80 sm:w-40 mx-auto sm:mx-0 rounded-md">
+                {% endif %}
                 <div>
                     <h3 class="text-xl md:text-3xl text-orange-600 font-semibold">{{event.name}}</h3>
                     <p class="text-black">{{event.description}}</p>
                     <h3 class="text-sm md:text-xl text-black font-bold">Location: {{event.location}}</h3>
-                    <div class="flex gap-2 justify-around items-center mt-3">
-                        <h3 class="text-sm md:text-xl text-center text-black font-bold"><span class="text-sm border-b-4 border-indigo-500 rounded">TOTAL PARTICIPANT</span>:<br>{{event.participant.count}}</h3>
-                        <a href="{% url "details" event.id %}" class="bg-black text-white py-2 px-3 font-semibold hover:bg-orange-400">SEE DETAILS</a>
+                    <div class="md:flex gap-2 justify-around items-center mt-3">
+                        <h3 class="text-sm md:text-xl text-center my-3 sm:my-0 text-black font-bold"><span class="text-sm border-b-4 border-indigo-500 rounded">TOTAL PARTICIPANT</span>:<br>{{event.participant.count}}</h3>
+                        <div>
+                            <a href="{% url "join-event" event.id %}" class="bg-black text-white py-2 px-3 font-semibold hover:bg-orange-400">RSVP</a>
+                            <a href="{% url "details" event.id %}" class="bg-black text-white py-2 px-3 font-semibold hover:bg-orange-400">SEE DETAILS</a>
+                        </div>
                     </div>
                 </div>
             </div>
