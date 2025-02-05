@@ -49,7 +49,7 @@ class LoginForm(StyleMixin, AuthenticationForm):
 
 class CreateGroupForm(StyleMixin, forms.ModelForm):
     permissions = forms.ModelMultipleChoiceField(
-        queryset= Permission.objects.all(),
+        queryset= Permission.objects.prefetch_related('content_type').all(),
         required= False,
         label= 'Assign Permission',
         widget= forms.CheckboxSelectMultiple
@@ -58,3 +58,9 @@ class CreateGroupForm(StyleMixin, forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name', 'permissions']
+
+class AssignRoleForm(StyleMixin, forms.Form):
+    role = forms.ModelChoiceField(
+        queryset=Group.objects.all(),
+        empty_label='Select a role'    
+    )

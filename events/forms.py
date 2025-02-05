@@ -1,5 +1,5 @@
 from django import forms
-from events.models import Event,Participant,Category
+from events.models import Event,Category
 
 class StyleMixin():
     form_style_classes = 'border border-gray-500 p-2 rounded-md w-full'
@@ -52,23 +52,16 @@ class StyleMixin():
 class EventModelForm(StyleMixin,forms.ModelForm):
     class Meta:
         model = Event
-        fields = ['name', 'description', 'date', 'time', 'location', 'category', 'participant']
+        fields = ['name', 'description', 'date', 'time', 'location', 'category', 'image']
         widgets = {
             'date': forms.SelectDateWidget,
             'category': forms.RadioSelect,
-            'participant': forms.CheckboxSelectMultiple,
             'time': forms.TimeInput(attrs={
                     'value': "13:00",
                     'step': "900",
                     'type': 'time'
                 })
         }
-    
-
-class ParticipantModelForm(StyleMixin,forms.ModelForm):
-    class Meta:
-        model = Participant
-        fields = ['name', 'email']
 
 
 class CategoryModelForm(StyleMixin,forms.ModelForm):

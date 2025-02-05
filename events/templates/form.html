@@ -2,8 +2,6 @@
 
 {% block forms %}
 <section class="max-w-[800px] mx-auto mt-10">
-    {% comment %} <input type="text" class="border-2 border-gray-600 p-2 rounded-md w-full space-y-2 mr-2"> {% endcomment %}
-    {% comment %} <textarea name="ok" class="resize-none" id=""></textarea> {% endcomment %}
     <div>
         {% if messages %}
             {% for message in messages %}
@@ -13,7 +11,7 @@
             {% endfor %}
         {% endif %}
     </div>
-    <form method="POST">
+    <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
         {{event_form.as_p}}
         {{participant_form.as_p}}

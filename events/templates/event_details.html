@@ -12,7 +12,11 @@
             <h3 class="text-lg text-orange-500 font-semibold">Featured Event Details</h3>
         </div>
         <h1 class="text-3xl font-bold mb-3">{{details.name}}</h1>
-        <img class="w-full rounded-md" src="{% static "images/details.jpeg" %}" alt="Event Details Image">
+        {% if details.image %}
+            <img src="{{details.image.url}}" alt="Event Details Image" class="w-full rounded-md">
+        {% else %}
+            <img class="w-full rounded-md" src="{% static "images/details.jpeg" %}" alt="Event Details Image">
+        {% endif %}
         <p class="mt-3 md:mt-5 text-lg block md:hidden">{{details.description}}</p>
         <div class="flex gap-1 md:gap-3 items-center mt-3 md:mt-5">
             <div class="flex gap-1 md:gap-2 items-center bg-slate-200 p-1 md:p-2 w-52">
@@ -26,7 +30,7 @@
                     <h3 class="text-sm md:text-lg font-bold">{{details.date}}</h3>
                 </div>                      
             </div>
-            <div class="flex gap-1 md:gap-2 items-center bg-slate-200 p-1 md:p-2 w-52 sm:max-w-80">
+            <div class="flex gap-1 md:gap-2 items-center bg-slate-200 p-1 md:p-2 min-w-32 md:min-w-52 max-w-80">
                 <div class="w-10 h-10 rounded-full bg-orange-400 flex justify-center items-center text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
@@ -75,7 +79,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>                                                                                 
                     </div>
-                    <h3 class="text-lg md:text-xl font-bold">{{participant.name}}</h3>
+                    <h3 class="text-lg md:text-xl font-bold">
+                        {% if participant.first_name %}
+                            {{participant.first_name}} {{participant.last_name}}
+                        {% else %}
+                            {{participant.username}}
+                        {% endif %}
+                    </h3>
                 </div>
             {% endfor %}
         </div>
