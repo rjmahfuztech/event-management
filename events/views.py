@@ -85,6 +85,7 @@ def dashboard(request):
     return render(request, "dashboard/dashboard.html", context)
 
 # get event
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def event(request):
     events = select_query.all()
@@ -94,6 +95,7 @@ def event(request):
     return render(request, "event.html", context)
 
 # Event Operation
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def add_event(request):
     event_form = EventModelForm()
@@ -110,6 +112,7 @@ def add_event(request):
     }
     return render(request, "form.html", context)
 
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def update_event(request,id):
     event = Event.objects.get(id=id)
@@ -126,6 +129,7 @@ def update_event(request,id):
     context = {'event_form': event_form}
     return render(request, "form.html", context)
 
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def delete_event(request, id):
     event = Event.objects.get(id=id)
@@ -138,6 +142,7 @@ def delete_event(request, id):
         return redirect('event')
 
 # get participant
+@login_required
 @user_passes_test(is_admin, login_url='no-permission')
 def participant(request):
     participants = User.objects.all()
@@ -165,6 +170,7 @@ def user_booked_events(request):
     return render(request, "user_booked_event.html", {'user_events': user_events})
         
 
+@login_required
 @user_passes_test(is_admin, login_url='no-permission')
 def delete_participant(request,id):
     participant = User.objects.get(id=id)
@@ -177,6 +183,7 @@ def delete_participant(request,id):
         return redirect('participant')
 
 # get category
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def category(request):
     categories = Category.objects.all()
@@ -186,6 +193,7 @@ def category(request):
     return render(request, "category.html", context)
 
 # Category Operation
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def add_category(request):
     category_form = CategoryModelForm()
@@ -202,6 +210,7 @@ def add_category(request):
     }
     return render(request, "form.html", context)
 
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def update_category(request,id):
     category = Category.objects.get(id=id)
@@ -218,6 +227,7 @@ def update_category(request,id):
     context = {"category_form": category_form}
     return render(request, "form.html", context)
 
+@login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def delete_category(request,id):
     category = Category.objects.get(id=id)

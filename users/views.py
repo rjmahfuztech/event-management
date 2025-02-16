@@ -6,6 +6,8 @@ from django.contrib.auth import  login, logout
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.views import LoginView
+
 
 # test
 def is_admin(user):
@@ -37,6 +39,12 @@ def sign_in(request):
 
     return render(request, "authentication/login.html", {'form':form})
 
+# Class Base View for Login
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'authentication/login.html'
+
+
 @login_required
 def sign_out(request):
     if request.method == 'POST':
@@ -52,6 +60,7 @@ def activate_user_account(request, user_id, token):
         return redirect('sign-in')
 
 
+@login_required
 @user_passes_test(is_admin, login_url='no-permission')
 def create_group(request):
     form = CreateGroupForm()
@@ -63,11 +72,13 @@ def create_group(request):
         
     return render(request, 'admin/create_group.html', {'form': form})
 
+@login_required
 @user_passes_test(is_admin, login_url='no-permission')
 def group_list(request):
     groups = Group.objects.prefetch_related('permissions').all()
     return render(request, 'admin/group_list.html', {'groups': groups})
 
+@login_required
 @user_passes_test(is_admin, login_url='no-permission')
 def delete_group(request, id):
     group = Group.objects.get(id=id)
@@ -79,6 +90,7 @@ def delete_group(request, id):
         messages.error(request, 'Opps! Something Went Wrong! Group Delete Failed!')
         return redirect('group-list')
 
+@login_required
 @user_passes_test(is_admin, login_url='no-permission')
 def assign_role(request, id):
     user = User.objects.get(id=id)
