@@ -159,3 +159,4 @@ FRONTEND_URL = 'https://event-management-9oft.onrender.com'
 
 LOGIN_URL = '/users/sign-in/'
 LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/'
