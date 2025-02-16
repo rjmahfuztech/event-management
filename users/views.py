@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView
 from django.views.generic import ListView, CreateView
 from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
 
 
 # test
@@ -62,23 +63,33 @@ def activate_user_account(request, user_id, token):
         return redirect('sign-in')
 
 
-@login_required
-@user_passes_test(is_admin, login_url='no-permission')
-def create_group(request):
-    form = CreateGroupForm()
-    if request.method == 'POST':
-        form = CreateGroupForm(request.POST)
-        if form.is_valid():
-            group = form.save()
-            messages.success(request, f"A new group `{group.name}` has been created successful!")
+# @login_required
+# @user_passes_test(is_admin, login_url='no-permission')
+# def create_group(request):
+#     form = CreateGroupForm()
+#     if request.method == 'POST':
+#         form = CreateGroupForm(request.POST)
+#         if form.is_valid():
+#             group = form.save()
+#             messages.success(request, f"A new group `{group.name}` has been created successful!")
         
-    return render(request, 'admin/create_group.html', {'form': form})
+#     return render(request, 'admin/create_group.html', {'form': form})
+
 
 # Class base view for Create group
+create_group_decorators = [login_required, user_passes_test(is_admin, login_url='no-permission')]
+@method_decorator(create_group_decorators, name='dispatch')
 class CustomCreateGroupView(CreateView):
     form_class = CreateGroupForm
     template_name = 'admin/create_group.html'
     context_object_name = 'form'
+    success_url = reverse_lazy('create-group')
+
+    def form_valid(self, form):
+        group = form.save()
+        messages.success(self.request, f"A new group `{group.name}` has been created successful!")
+        return super().form_valid(form)
+
 
 # @login_required
 # @user_passes_test(is_admin, login_url='no-permission')
