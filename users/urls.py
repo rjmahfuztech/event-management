@@ -1,5 +1,5 @@
 from django.urls import path
-from users.views import sign_up,activate_user_account,create_group,delete_group,assign_role,no_permission, CustomLoginView, CustomGroupListView, CustomCreateGroupView
+from users.views import sign_up,activate_user_account,delete_group,assign_role,no_permission, CustomLoginView, CustomGroupListView, CustomCreateGroupView
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 
