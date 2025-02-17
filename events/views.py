@@ -127,24 +127,26 @@ def add_event(request):
     }
     return render(request, "form.html", context)
 
-@login_required
-@user_passes_test(is_organizer_or_admin, login_url='no-permission')
-def update_event(request,id):
-    event = Event.objects.get(id=id)
-    event_form = EventModelForm(instance=event)
+# @login_required
+# @user_passes_test(is_organizer_or_admin, login_url='no-permission')
+# def update_event(request,id):
+#     event = Event.objects.get(id=id)
+#     event_form = EventModelForm(instance=event)
     
-    if request.method == "POST":
-        event_form = EventModelForm(request.POST, request.FILES, instance=event)
+#     if request.method == "POST":
+#         event_form = EventModelForm(request.POST, request.FILES, instance=event)
 
-        if event_form.is_valid():
-            event_form.save()
-            messages.success(request, 'Event Updated Successful!')
-            return redirect('update-event', id)
+#         if event_form.is_valid():
+#             event_form.save()
+#             messages.success(request, 'Event Updated Successful!')
+#             return redirect('update-event', id)
 
-    context = {'event_form': event_form}
-    return render(request, "form.html", context)
+#     context = {'event_form': event_form}
+#     return render(request, "form.html", context)
 
 # Class base view for update event
+event_update_decorators = [login_required, user_passes_test(is_organizer_or_admin, login_url='no-permission')]
+@method_decorator(event_update_decorators, name='dispatch')
 class CustomUpdateEventView(UpdateView):
     model = Event
     form_class = EventModelForm
