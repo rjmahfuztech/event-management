@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div class="max-w-[700px] mx-auto my-8 shadow-lg py-5 px-10 bg-slate-50 rounded-md">
-        <h1 class="text-2xl text-center font-bold mt-5">Register Your Account.</h1>
+{% extends "home.html" %}
+{% block form %}
+    <div class="max-w-[700px] mx-auto mt-28 shadow-sm border py-5 px-3 sm:px-10 rounded-md">
+        <h1 class="text-2xl text-center font-bold my-5">Register Your Account.</h1>
         <form method="POST">
             {% csrf_token %}
             {% for field in form %}
@@ -29,9 +22,8 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            <p class="text-right font-semibold my-2"><a class="mr-3 font-normal" href="{% url "event-info" %}">Back Home</a> Already have an account? <a href="{% url "sign-in" %}" class="text-orange-400 font-bold ml-2">Login</a></p>
+            <p class="text-right font-semibold my-2">Already have an account? <a href="{% url "sign-in" %}" class="text-orange-400 font-bold ml-2">Login</a></p>
             <button class="w-full rounded-md my-2 font-semibold bg-black hover:bg-gray-700 p-2 text-white" type="submit">Register</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock form %}

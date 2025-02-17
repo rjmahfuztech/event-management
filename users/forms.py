@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Permission, Group
 from events.forms import StyleMixin
 from django import forms
 import re
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 
 
 class RegistrationForm(StyleMixin,forms.ModelForm):
@@ -64,3 +64,17 @@ class AssignRoleForm(StyleMixin, forms.Form):
         queryset=Group.objects.all(),
         empty_label='Select a role'    
     )
+
+class UpdateProfileForm(StyleMixin, forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+class ChangePasswordForm(StyleMixin, PasswordChangeForm):
+    pass
+
+class ResetPasswordForm(StyleMixin, PasswordResetForm):
+    pass
+
+class ResetPasswordConfirmForm(StyleMixin, SetPasswordForm):
+    pass

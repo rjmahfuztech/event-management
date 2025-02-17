@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div class="max-w-[700px] mx-auto my-8 shadow-lg py-5 px-10 bg-slate-50 rounded-md">
-        <h1 class="text-2xl text-center font-bold mt-5">Login To Your Account.</h1>
+{% extends "home.html" %}
+{% block form %}
+    <div class="max-w-[700px] mx-auto mt-28 shadow-sm border py-5 px-3 sm:px-10 rounded-md">
+        <h1 class="text-2xl text-center font-bold my-5">Login To Your Account.</h1>
         <div>
             {% if messages %}
                   {% for message in messages %}
@@ -31,10 +24,11 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            <p class="text-right font-semibold my-2"><a class="mr-3 font-normal" href="{% url "event-info" %}">Back Home</a> Don't have an account? <a href="{% url "sign-up" %}" class="text-orange-400 font-bold ml-2">Sign Up</a></p>
+            <p class="text-right font-semibold my-2">Don't have an account? <a href="{% url "sign-up" %}" class="text-orange-400 font-bold ml-2 inline-block">Sign Up</a></p>
             <button class="w-full rounded-md my-2 font-semibold bg-black hover:bg-gray-700 p-2 text-white" type="submit">Login</button>
         </form>
-        
+        <div class="text-right">
+            <a class="text-gray-700 font-semibold hover:text-black" href="{% url "reset-password" %}">Forgot Password</a>
+        </div>
     </div>
-</body>
-</html>
+{% endblock form %}

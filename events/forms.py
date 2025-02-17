@@ -2,7 +2,7 @@ from django import forms
 from events.models import Event,Category
 
 class StyleMixin():
-    form_style_classes = 'border border-gray-500 p-2 rounded-md w-full'
+    form_style_classes = 'border border-gray-500 p-2 rounded-md w-full mb-2'
 
     def formFieldStyle(self):
         for field_key, field in self.fields.items():
@@ -18,13 +18,13 @@ class StyleMixin():
                 })
             elif isinstance(field.widget, forms.PasswordInput):
                 field.widget.attrs.update({
-                    'class': self.form_style_classes,
+                    'class': f'{self.form_style_classes} mb-2 mt-1',
                     'placeholder': f'Enter password'
                 })
             elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': f'{self.form_style_classes} resize-none',
-                    'placeholder': f'Enter {field.label.lower()}',
+                    'placeholder': f'Enter {field.label.lower()} mb-2',
                     'row': 3
                 })
             elif isinstance(field.widget, forms.SelectDateWidget):

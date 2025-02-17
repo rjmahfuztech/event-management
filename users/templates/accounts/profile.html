@@ -1,0 +1,51 @@
+{% extends "dashboard/manage_dashboard.html" %}
+{% block profile %}
+<div class="max-w-[800px] mx-auto h-screen">
+    <h1 class="text-xl sm:text-2xl text-center mb-3">Welcome <b>{{username}}</b> to your profile.</h1>
+    <div>
+        {% if messages %}
+              {% for message in messages %}
+                <p class="px-2 py-3 text-white font-semibold text-center {% if message.tags == 'success' %}bg-green-400{% elif message.tags == 'error' %} bg-yellow-500{% endif %}">
+                  {{message}}
+                </p>
+              {% endfor %}
+          {% endif %}
+    </div>
+    <div class="mt-5 grid grid-cols sm:grid-cols-2 border px-5 py-3 shadow-sm">
+        <div class="flex items-center gap-3">
+            <img class="w-20 h-20 rounded-full object-cover" src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="Profile Picture">
+            <div>
+                <h3 class="text-xl">{{name}}</h3>
+                <h3 class="text-lg">{{designation}}</h3>
+            </div>
+        </div>
+        <div class="text-right mt-2">
+            <a href="{% url "update-profile" %}" class="text-lg font-semibold border shadow-sm px-3 py-1 sm:w-40">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 inline mr-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                </svg>
+                 Update
+        </a>
+        </div>
+    </div>
+    <div class="mt-5 border px-5 py-3 shadow-sm">
+        <h1 class="text-xl sm:text-2xl font-bold mb-3">Personal Information</h1>
+        <div class="grid grid-cols sm:grid-cols-2 gap-4 md:gap-16">
+            <div>
+                <h3 class="text-xl font-semibold mt-2">Name</h3>
+                <h4 class="text-lg">{{name}}</h4>
+                <h3 class="text-xl font-semibold mt-2">Email</h3>
+                <h4 class="text-lg">{{email}}</h4>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold mt-2">Username</h3>
+                <h4 class="text-lg">{{username}}</h4>
+                <h3 class="text-xl font-semibold mt-2">Phone</h3>
+                <h4 class="text-lg">{{email}}</h4>
+            </div>
+        </div>
+        <h3 class="text-xl font-semibold mt-3">Bio</h3>
+        <p class="">{{username}}</p>
+    </div>
+</div>
+{% endblock profile %}
