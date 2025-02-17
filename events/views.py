@@ -7,6 +7,9 @@ from django.db.models import Count,Q
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_admin
+from django.views.generic import DetailView, UpdateView
+from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
 
 # Test
 def is_organizer_or_admin(user):
@@ -44,13 +47,25 @@ def events_info(request):
     return render(request, "event_info.html",context)
 
 
-@login_required
-def event_details(request, id):
-    details = prefetch_query.get(id=id)
-    context ={
-        "details": details
-    }
-    return render(request, "event_details.html",context)
+# @login_required
+# def event_details(request, id):
+#     details = prefetch_query.get(id=id)
+#     context ={
+#         "details": details
+#     }
+#     return render(request, "event_details.html",context)
+
+# Class base view for event details
+@method_decorator(login_required, name='dispatch')
+class CustomEventDetailsView(DetailView):
+    model = Event
+    template_name = 'event_details.html'
+    pk_url_kwarg = 'id'
+    context_object_name = 'details'
+
+    def get_queryset(self):
+        queryset = Event.objects.prefetch_related('participant')
+        return queryset
 
 @login_required
 def dashboard(request):
@@ -119,7 +134,7 @@ def update_event(request,id):
     event_form = EventModelForm(instance=event)
     
     if request.method == "POST":
-        event_form = EventModelForm(request.POST, instance=event)
+        event_form = EventModelForm(request.POST, request.FILES, instance=event)
 
         if event_form.is_valid():
             event_form.save()
@@ -128,6 +143,32 @@ def update_event(request,id):
 
     context = {'event_form': event_form}
     return render(request, "form.html", context)
+
+# Class base view for update event
+class CustomUpdateEventView(UpdateView):
+    model = Event
+    form_class = EventModelForm
+    pk_url_kwarg = 'id'
+    template_name = 'form.html'
+    context_object_name = 'event'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['event_form'] = self.get_form()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        event_form = EventModelForm(request.POST, request.FILES, instance=self.object)
+
+        if event_form.is_valid():
+            event_form.save()
+            messages.success(request, 'Event Updated Successful!')
+            return  redirect('update-event', self.object.id)
+        else:
+            messages.error(request, 'Opps!! Something went wrong please try again!')
+            return  redirect('update-event', self.object.id)
+    
 
 @login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')

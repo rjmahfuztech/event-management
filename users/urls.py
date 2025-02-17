@@ -1,5 +1,5 @@
 from django.urls import path
-from users.views import sign_up,activate_user_account,delete_group,assign_role,no_permission, CustomLoginView, CustomGroupListView, CustomCreateGroupView
+from users.views import sign_up,activate_user_account,assign_role,no_permission, CustomLoginView, CustomGroupListView, CustomCreateGroupView,CustomGroupDeleteView
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 
@@ -17,6 +17,7 @@ urlpatterns = [
     path('admin/create-group/', CustomCreateGroupView.as_view(), name='create-group'),
     # path('admin/group-list/', group_list, name='group-list'),
     path('admin/group-list/', CustomGroupListView.as_view(), name='group-list'),
-    path('admin/delete-group/<int:id>/', delete_group, name='delete-group'),
+    # path('admin/delete-group/<int:id>/', delete_group, name='delete-group'),
+    path('admin/delete-group/<int:id>/', CustomGroupDeleteView.as_view(), name='delete-group'),
     path('admin/assign-role/<int:id>/', assign_role, name='assign-role')
 ]

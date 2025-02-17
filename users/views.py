@@ -7,7 +7,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 
@@ -77,8 +77,8 @@ def activate_user_account(request, user_id, token):
 
 
 # Class base view for Create group
-create_group_decorators = [login_required, user_passes_test(is_admin, login_url='no-permission')]
-@method_decorator(create_group_decorators, name='dispatch')
+group_create_decorators = [login_required, user_passes_test(is_admin, login_url='no-permission')]
+@method_decorator(group_create_decorators, name='dispatch')
 class CustomCreateGroupView(CreateView):
     form_class = CreateGroupForm
     template_name = 'admin/create_group.html'
@@ -110,18 +110,33 @@ class CustomGroupListView(ListView):
         return queryset
     
 
+# @login_required
+# @user_passes_test(is_admin, login_url='no-permission')
+# def delete_group(request, id):
+#     group = Group.objects.get(id=id)
+#     if request.method == 'POST':
+#         group.delete()
+#         messages.success(request, f"Group `{group.name}` has been deleted successful!")
+#         return redirect('group-list')
+#     else:
+#         messages.error(request, 'Opps! Something Went Wrong! Group Delete Failed!')
+#         return redirect('group-list')
 
-@login_required
-@user_passes_test(is_admin, login_url='no-permission')
-def delete_group(request, id):
-    group = Group.objects.get(id=id)
-    if request.method == 'POST':
-        group.delete()
-        messages.success(request, f"Group `{group.name}` has been deleted successful!")
-        return redirect('group-list')
-    else:
-        messages.error(request, 'Opps! Something Went Wrong! Group Delete Failed!')
-        return redirect('group-list')
+# Class base view for delete group
+group_delete_decorators = [login_required, user_passes_test(is_admin, login_url='no-permission')]
+@method_decorator(group_list_decorators, name='dispatch')
+class CustomGroupDeleteView(DeleteView):
+    model = Group
+    pk_url_kwarg = 'id'
+    success_url = reverse_lazy('group-list')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        group_name = self.object.name
+        self.object.delete()
+        messages.success(request, f"Group `{group_name}` has been deleted successful!")
+        
+        return redirect(self.success_url)
 
 @login_required
 @user_passes_test(is_admin, login_url='no-permission')
