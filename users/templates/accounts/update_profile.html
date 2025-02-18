@@ -4,7 +4,17 @@
     <h1 class="text-center font-semibold mb-6 text-2xl">Update your profile</h1>
     <form method="POST", enctype='multipart/form-data'>
         {% csrf_token %}
-        {{ form }}
+        {% for field in form %}
+            <label for="{{field.id_for_label}}">{{field.label}}:</label>
+            {{field}}
+            {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li class="text-orange-400 font-bold">{{error}}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
         <button class="w-40 md:w-80 bg-black p-2 border rounded-md text-white mt-2" type="submit" value="Submit">Update Profile</button>
     </form>
 </div>

@@ -72,14 +72,11 @@ class UpdateProfileForm(StyleMixin, forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email', 'phone', 'bio', 'profile_image']
 
-    def clean_phone_number(self):
+    def clean_phone(self):
         phone = self.cleaned_data.get('phone')
-        phone_present = User.objects.filter(phone=phone).exists()
-        
-        if phone_present:
-            raise forms.ValidationError('This phone number is already exists!')
-        elif not re.search(r'^\+?\d{9,15}$', phone):
-            raise forms.ValidationError("Enter a valid phone number with 9 to 15 digits (e.g., +8801999999999, 0199999999 +1999999999).")
+
+        if not re.match(r'^\+?\d{9,15}$', phone):
+            raise forms.ValidationError("Enter a valid phone number from 9 to 15 digits (e.g., +8801999999999, 0199999999, +1999999999).")
         
         return phone
         

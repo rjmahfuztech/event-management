@@ -14,7 +14,7 @@
             {% endfor %}
         {% endif %}
 </div>
-{% if user_events.exists %}
+{% if user_events %}
     <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -66,6 +66,6 @@
         </table>
     </div>
 {% else %}
-    <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">Sorry! You are not booked any event yet!!</h2>
+    <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">Opps!! You are not booked any event yet!!</h2>
 {% endif %}
 {% endblock event %}

@@ -47,28 +47,61 @@
                 Past Events
             </a>
         </div>
-        <div class="bg-slate-50 text-black mt-5 divide-y">
-            {% if events %}
-                <div class="grid grid-cols-3 gap-2 md:gap-4 md:grid-cols-5 divide-y">
-                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Title</h2>
-                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold hidden md:block">Category</h2>
-                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold hidden md:block">Location</h2>
-                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Date</h2>
-                    <h2 class="p-2 text-center text-sm sm:text-lg font-semibold">Time</h2>
-                </div>
-                <div class="grid grid-cols-3 gap-2 md:gap-4 md:grid-cols-5">
-                    {% for event in events %}
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.name}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.category}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.location}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.date}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.time}}</h2>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <h2 class="max-w-80 mx-auto mt-5 sm:mt-10 text-center justify-center  text-lg sm:text-xl font-bold">Sorry! No events available!!</h2>
-            {% endif %}
-        </div>
+
+        {% if events %}
+            <div class="relative overflow-x-auto shadow-md mt-5">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Description
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Category
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Location
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Date
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Time
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                            <tr class="bg-white border-b dark:bg-gray-800 text-black dark:border-gray-700 border-gray-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{event.name}}
+                                </th>
+                                <td class="px-6 py-4 min-w-80">
+                                    {{event.description}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{event.category.name}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{event.location}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{event.date}}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{event.time}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">Sorry! No events available!!</h2>
+        {% endif %}
     </section>
 </div>
 {% endblock dashboard %}

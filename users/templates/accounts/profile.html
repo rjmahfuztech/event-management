@@ -1,7 +1,8 @@
 {% extends "dashboard/manage_dashboard.html" %}
+{% load static %}
 {% block profile %}
-<div class="max-w-[800px] mx-auto h-screen">
-    <h1 class="text-xl sm:text-2xl text-center mb-3">Welcome <b>{{username}}</b> to your profile.</h1>
+<div class="max-w-[800px] mx-auto">
+    <h1 class="text-xl sm:text-2xl text-center mb-10">Welcome <b>{{username}}</b> to your profile.</h1>
     <div>
         {% if messages %}
               {% for message in messages %}
@@ -11,16 +12,24 @@
               {% endfor %}
           {% endif %}
     </div>
-    <div class="mt-5 grid grid-cols sm:grid-cols-2 border px-5 py-3 shadow-sm">
+    <div class="mt-5 grid grid-cols sm:grid-cols-2 border px-5 py-3 shadow-sm rounded-md">
         <div class="flex items-center gap-3">
-            <img class="w-20 h-20 rounded-full object-cover" src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="Profile Picture">
+            {% if profile_image %}
+                <div class="w-20 h-20 overflow-hidden bg-gray-100 rounded-full">
+                    <img class="w-full" src="{{profile_image.url}}" alt="Profile Picture">
+                </div>
+            {% else %}
+                <div class="w-20 h-20 overflow-hidden bg-gray-100 rounded-full">
+                    <img class="w-full" src="{% static "profile_images/default-img.jpg" %}" alt="Profile Picture">
+                </div>
+            {% endif %}
             <div>
                 <h3 class="text-xl">{{name}}</h3>
-                <h3 class="text-lg">{{designation}}</h3>
+                <h3 class="text-[16px] font-bold">{{designation}}</h3>
             </div>
         </div>
         <div class="text-right mt-2">
-            <a href="{% url "update-profile" %}" class="text-lg font-semibold border shadow-sm px-3 py-1 sm:w-40">
+            <a href="{% url "update-profile" %}" class="text-lg font-semibold border shadow-sm px-3 py-1 w-40 bg-blue-700 hover:bg-black text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 inline mr-1">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                 </svg>
@@ -28,24 +37,40 @@
         </a>
         </div>
     </div>
-    <div class="mt-5 border px-5 py-3 shadow-sm">
+    <div class="mt-5 border px-5 py-3 shadow-sm rounded-md">
         <h1 class="text-xl sm:text-2xl font-bold mb-3">Personal Information</h1>
         <div class="grid grid-cols sm:grid-cols-2 gap-4 md:gap-16">
             <div>
-                <h3 class="text-xl font-semibold mt-2">Name</h3>
+                <h3 class="text-xl font-semibold mt-2">Name:</h3>
                 <h4 class="text-lg">{{name}}</h4>
-                <h3 class="text-xl font-semibold mt-2">Email</h3>
+                <h3 class="text-xl font-semibold mt-2">Email:</h3>
                 <h4 class="text-lg">{{email}}</h4>
+                <h3 class="text-xl font-semibold mt-2">Last Login:</h3>
+                <h4 class="text-lg">{{last_login}}</h4>
             </div>
             <div>
-                <h3 class="text-xl font-semibold mt-2">Username</h3>
+                <h3 class="text-xl font-semibold mt-2">Username:</h3>
                 <h4 class="text-lg">{{username}}</h4>
-                <h3 class="text-xl font-semibold mt-2">Phone</h3>
-                <h4 class="text-lg">{{email}}</h4>
+                <h3 class="text-xl font-semibold mt-2">Phone:</h3>
+                <h4 class="text-lg">
+                    {% if phone %}
+                        {{phone}}
+                    {% else %}
+                        Add your phone number!!
+                    {% endif %}
+                </h4>
+                <h3 class="text-xl font-semibold mt-2">Member Since:</h3>
+                <h4 class="text-lg">{{member_since}}</h4>
             </div>
         </div>
-        <h3 class="text-xl font-semibold mt-3">Bio</h3>
-        <p class="">{{username}}</p>
+        <h3 class="text-xl font-semibold mt-3">Bio:</h3>
+        <p class="md:pr-5">
+            {% if bio %}
+                {{bio}}
+            {% else %}
+                Add your bio data!!
+            {% endif %}
+        </p>
     </div>
 </div>
 {% endblock profile %}

@@ -121,6 +121,9 @@ class UserProfileView(TemplateView):
         context['designation'] = user.groups.first().name # query duplicate
         context['last_login'] = user.last_login
         context['member_since'] = user.date_joined
+        context['profile_image'] = user.profile_image
+        context['phone'] = user.phone
+        context['bio'] = user.bio
 
         return context
 
