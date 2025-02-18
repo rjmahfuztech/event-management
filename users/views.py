@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
+from django.contrib.auth import get_user_model
 from users.forms import RegistrationForm, LoginForm, CreateGroupForm, AssignRoleForm, UpdateProfileForm, ChangePasswordForm, ResetPasswordForm, ResetPasswordConfirmForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordRes
 from django.views.generic import ListView, CreateView, DeleteView, TemplateView, UpdateView
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
+User = get_user_model()
 
 
 # test

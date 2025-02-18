@@ -4,12 +4,13 @@ from events.models import Event,Category
 from django.contrib import messages
 from datetime import date
 from django.db.models import Count,Q
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_admin
 from django.views.generic import DetailView, UpdateView
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
+User = get_user_model()
 
 # Test
 def is_organizer_or_admin(user):

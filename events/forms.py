@@ -24,7 +24,7 @@ class StyleMixin():
             elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': f'{self.form_style_classes} resize-none',
-                    'placeholder': f'Enter {field.label.lower()} mb-2',
+                    'placeholder': f'Enter {field.label.lower()}',
                     'row': 3
                 })
             elif isinstance(field.widget, forms.SelectDateWidget):

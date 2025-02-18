@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User, Permission, Group
+from django.contrib.auth.models import Permission, Group
+from django.contrib.auth import get_user_model
 from events.forms import StyleMixin
 from django import forms
 import re
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
+User = get_user_model()
 
 
 class RegistrationForm(StyleMixin,forms.ModelForm):
@@ -68,7 +70,20 @@ class AssignRoleForm(StyleMixin, forms.Form):
 class UpdateProfileForm(StyleMixin, forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'bio', 'profile_image']
+
+    def clean_phone_number(self):
+        phone = self.cleaned_data.get('phone')
+        phone_present = User.objects.filter(phone=phone).exists()
+        
+        if phone_present:
+            raise forms.ValidationError('This phone number is already exists!')
+        elif not re.search(r'^\+?\d{9,15}$', phone):
+            raise forms.ValidationError("Enter a valid phone number with 9 to 15 digits (e.g., +8801999999999, 0199999999 +1999999999).")
+        
+        return phone
+        
+
 
 class ChangePasswordForm(StyleMixin, PasswordChangeForm):
     pass
