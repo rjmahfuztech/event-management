@@ -2,38 +2,62 @@
 
 {% block dashboard %}
 <div class="">
-    <div class="grid grid-cols-2 gap-3 md:gap-4 md:grid-cols-4">
-        <h2 class="bg-orange-500 text-white p-3 text-center text-lg sm:text-xl font-semibold">Total Participants: {{total_participant}}</h2>
-        <h2 class="bg-orange-500 text-white p-3 text-center text-lg sm:text-xl font-semibold">Total Events: {{count.total_event}}</h2>
-        <h2 class="bg-orange-500 text-white p-3 text-center text-lg sm:text-xl font-semibold">Total Upcoming Events: {{count.total_upcoming}}</h2>
-        <h2 class="bg-orange-500 text-white p-3 text-center text-lg sm:text-xl font-semibold">Total Past Events: {{count.total_past}}</h2>
-    </div>
-    {% comment %} Events Scheduled For Today {% endcomment %}
-    <section class="mt-5 md:mt-10">
-        <h2 class="max-w-80 mx-auto text-center justify-center border-b-4 border-orange-400 text-lg sm:text-2xl font-bold">Events Scheduled For Today</h2>
-        {% if todays_event %}
-            <div class="bg-slate-200 text-black mt-5 divide-y divide-blue-200">
-                <div class="grid grid-cols-3 gap-3 md:gap-4 md:grid-cols-5">
-                    <h2 class=" p-3 text-center text-lg sm:text-xl font-semibold">Title</h2>
-                    <h2 class="p-3 text-center text-lg sm:text-xl font-semibold hidden md:block">Category</h2>
-                    <h2 class="p-3 text-center text-lg sm:text-xl font-semibold hidden md:block">Location</h2>
-                    <h2 class="p-3 text-center text-lg sm:text-xl font-semibold">Date</h2>
-                    <h2 class="p-3 text-center text-lg sm:text-xl font-semibold">Time</h2>
-                </div>
-                <div class="grid grid-cols-3 gap-3 md:gap-4 md:grid-cols-5">
-                    {% for event in todays_event %}
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.name}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.category}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold hidden md:block">{{event.location}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.date}}</h2>
-                        <h2 class="p-2 text-center text-xs sm:text-sm font-semibold">{{event.time}}</h2>
-                    {% endfor %}
-                </div>
+    <div class="grid grid-cols gap-3 lg:grid-cols-5 shadow-sm py-5">
+        <div class="lg:col-span-3">
+            <div class="grid grid-cols md:grid-cols-2 gap-3">
+                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Participants: {{total_participant}}</h2>
+                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Events: {{count.total_event}}</h2>
+                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Upcoming Events: {{count.total_upcoming}}</h2>
+                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Past Events: {{count.total_past}}</h2>
             </div>
-        {% else %}
-            <h2 class="max-w-80 mx-auto mt-5 sm:mt-10 text-center justify-center  text-lg sm:text-xl font-bold">No events available for today!!</h2>
-        {% endif %}
-    </section>
+        </div>
+        <div class="lg:col-span-2 overflow-x-auto shadow-sm border hover:shadow-lg transition-all p-2">
+            {% comment %} Events Scheduled For Today {% endcomment %}
+            <h2 class="max-w-80 mx-auto text-center justify-center border-b-4 border-orange-400 text-lg sm:text-2xl font-bold">Events Scheduled For Today</h2>
+            {% if todays_event %}
+                <div class="relative mt-5">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Title
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Category
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Location
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Time
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for event in todays_event %}
+                                <tr class="bg-white border-b dark:bg-gray-800 text-black dark:border-gray-700 border-gray-200">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{event.name}}
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{event.category.name}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{event.location}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{event.time}}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">No events available for today!!</h2>
+            {% endif %}
+        </div>
+    </div>
     {% comment %} Interactive Stats {% endcomment %}
     <section class="mt-5 md:mt-14">
         <div class="flex rounded-md shadow-xs justify-center mt-5 md:mt-10" role="group">
@@ -54,7 +78,7 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Name
+                                Title
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Description
