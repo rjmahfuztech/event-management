@@ -2,15 +2,16 @@
 {% load static %}
 
 {% block header %}
-<header class="bg-[url({% static 'images/bg1.jpg' %})] w-full bg-cover bg-center pt-20">
+<header class="bg-[url({% static 'images/bg1.jpg' %})] w-full h-screen bg-cover bg-center pt-20 relative">
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
     {% comment %} Banner section {% endcomment %}
-    <section class="max-w-[1400px] p-3 mx-auto grid gap-4 grid-cols md:grid-cols-2 items-center justify-center">
-      <div class="text-center md:text-left">
-        <h3 class="text-xl md:text-2xl font-semibold text-white">WELCOME TO,</h3>
-        <h1 class="text-3xl md:text-6xl font-bold text-white">Effortless Event<br>Management</h1>
-      </div>
-      <div class="flex justify-center">
-        <img class="w-80 lg:w-96 rounded-lg" src="{% static 'images/event-img.jpeg' %}" alt="Event Image">
+    <section class="absolute inset-0 z-10 flex items-center justify-center">
+      <div class="w-96 md:w-[600px] p-2">
+        <h3 class="text-lg md:text-xl font-semibold text-white mb-2 md:mb-4">WELCOME TO,</h3>
+        <h1 class="text-2xl md:text-5xl font-bold text-white">
+            The World’s Best Event Management Agency for Corporate
+        </h1>
+        <p class="text-white mt-2 md:mt-4 font-semibold">A integer hac in id. Mollis consequat, consectetur egestas in quam. Id velit eleifend tincidunt varius sagittis sed ut. Pretium, risus ac augue arcu ullamcorper semper integer</p>
       </div>
     </section>
 </header>
@@ -18,40 +19,40 @@
 
 {% block event %}
 {% comment %} Search Section {% endcomment %}
-<section class="bg-amber-500 shadow-md rounded-md p-5 md:p-9 md:pb-14 relative -top-5 md:static md:top-0 md:-mt-9">
-    <h2 class="text-2xl text-center md:text-left md:text-4xl mb-3 md:mb-0 text-white font-semibold md:relative left-20">SEARCH THE BEST EVENT!</h2>
-    <h2 class="text-xl text-center md:text-left mb-3 md:mb-0 text-white font-semibold md:relative left-20">Search events by name or category or both or Start and End date</h2>
+<section class="bg-white shadow-md rounded-md p-5 md:p-9 md:pb-14 relative -top-28">
+    <h2 class="text-2xl text-center md:text-left md:text-4xl mb-3 md:mb-0 text-black font-semibold md:relative left-20">SEARCH THE BEST EVENT!</h2>
+    <h2 class="text-xl text-center md:text-left mb-3 md:mb-0 text-black font-semibold md:relative left-20">Search events by name or category or both or Start and End date</h2>
     {% comment %} for name or category or both filter  {% endcomment %}
     <form class="md:flex gap-3 md:px-20 justify-between md:pt-14" action="{% url "event-info" %}" method="GET">
         {% csrf_token %}
-        <input class="w-full p-2 md:p-3 rounded-md" placeholder="Search event name.." name="name" type="text">
-        <select class="w-full p-2 md:p-3 mt-3 md:mt-0 rounded-md" name="category">
-            <option value="all">--Choose Category--</option>
+        <input class="w-full p-2 md:p-3 rounded-full border border-red-500" placeholder="Search event name.." name="name" type="text">
+        <select class="w-full p-2 md:p-3 mt-3 md:mt-0 rounded-full border border-red-500" name="category">
+            <option class="" value="all">Choose Category</option>
             {% for category in categories %}
                 <option value="{{category.id}}">{{category.name}}</option>
             {% endfor %}
         </select>
-        <button type="submit" class="w-full mt-3 md:mt-0 p-2 md:p-3 bg-stone-950 text-white font-semibold">Search</button>
+        <button type="submit" class="w-full mt-3 md:mt-0 p-2 md:p-3 rounded-full bg-stone-950 text-white font-semibold">Search</button>
     </form>
     {% comment %} for start and end filter  {% endcomment %}
     <form class="grid grid-cols-3 gap-1 md:gap-3 md:px-20 justify-between items-center md:pt-4" action="{% url "event-info" %}" method="GET">
         {% csrf_token %}
         <div>
-            <label class="text-white" for="start">Start Date</label>
-            <input class="w-full p-1 md:p-3 rounded-md" type="date" id="start" required name="start-date">
+            <label class="text-black ml-2" for="start">Start Date</label>
+            <input class="w-full p-1 md:p-3 rounded-full border border-red-500" type="date" id="start" required name="start-date">
         </div>
         <div>
-            <label class="text-white" for="end">End Date</label>
-            <input class="w-full p-1 md:p-3 rounded-md" type="date" id="end" required name="end-date">
+            <label class="text-black ml-2" for="end">End Date</label>
+            <input class="w-full p-1 md:p-3 rounded-full border border-red-500" type="date" id="end" required name="end-date">
         </div>
         <div class="mt-3 md:mt-5">
-            <button type="submit" class="w-full mt-3 md:mt-0 p-2 md:p-3 bg-stone-950 text-white font-semibold">Search</button>
+            <button type="submit" class="w-full mt-3 md:mt-0 p-2 md:p-3 rounded-full bg-stone-950 text-white font-semibold">Search</button>
         </div>
     </form>
 </section>
 {% comment %} All Event {% endcomment %}
 {% if event_data.exists %}
-    <section class="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+    <section class="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {% for event in event_data %}
             <div class=" bg-white border border-gray-200 rounded-lg shadow-sm ">
                 {% if event.image %}
