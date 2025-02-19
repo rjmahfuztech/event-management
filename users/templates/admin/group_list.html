@@ -1,6 +1,7 @@
 {% extends "dashboard/manage_dashboard.html" %}
 
 {% block group %}
+<div class="bg-white shadow-md border py-5 px-3 sm:px-10 rounded-md">
     <div class="flex justify-center mb-3">
         <h1 class="text-lg lg:text-3xl whitespace-nowrap inline-block font-bold mt-3 mb-5 border-b-2 rounded-md border-slate-700">All Groups And Their Permission</h1>
     </div>
@@ -13,7 +14,7 @@
             {% endfor %}
         {% endif %}
     </div>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -56,4 +57,5 @@
             </tbody>
         </table>
     </div>
+</div>
 {% endblock group %}

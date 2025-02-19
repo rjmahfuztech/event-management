@@ -18,7 +18,7 @@ class StyleMixin():
                 })
             elif isinstance(field.widget, forms.PasswordInput):
                 field.widget.attrs.update({
-                    'class': f'{self.form_style_classes} mb-2 mt-1',
+                    'class': f'{self.form_style_classes}',
                     'placeholder': f'Enter password'
                 })
             elif isinstance(field.widget, forms.Textarea):

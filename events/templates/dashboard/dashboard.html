@@ -1,17 +1,17 @@
 {% extends "dashboard/manage_dashboard.html" %}
 
 {% block dashboard %}
-<div class="">
-    <div class="grid grid-cols gap-3 lg:grid-cols-5 shadow-sm py-5">
+<div>
+    <div class="grid grid-cols gap-4 lg:grid-cols-5 py-4">
         <div class="lg:col-span-3">
-            <div class="grid grid-cols md:grid-cols-2 gap-3">
-                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Participants: {{total_participant}}</h2>
-                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Events: {{count.total_event}}</h2>
-                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Upcoming Events: {{count.total_upcoming}}</h2>
-                <h2 class="shadow-sm border hover:shadow-lg transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Past Events: {{count.total_past}}</h2>
+            <div class="grid grid-cols md:grid-cols-2 gap-4">
+                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Participants: {{total_participant}}</h2>
+                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Events: {{count.total_event}}</h2>
+                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Upcoming Events: {{count.total_upcoming}}</h2>
+                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Past Events: {{count.total_past}}</h2>
             </div>
         </div>
-        <div class="lg:col-span-2 overflow-x-auto shadow-sm border hover:shadow-lg transition-all p-2">
+        <div class="lg:col-span-2 overflow-x-auto shadow-md bg-white hover:shadow-2xl transition-all p-2">
             {% comment %} Events Scheduled For Today {% endcomment %}
             <h2 class="max-w-80 mx-auto text-center justify-center border-b-4 border-orange-400 text-lg sm:text-2xl font-bold">Events Scheduled For Today</h2>
             {% if todays_event %}
@@ -59,8 +59,8 @@
         </div>
     </div>
     {% comment %} Interactive Stats {% endcomment %}
-    <section class="mt-5 md:mt-14">
-        <div class="flex rounded-md shadow-xs justify-center mt-5 md:mt-10" role="group">
+    <div class="bg-white shadow-md border py-5 px-3 sm:px-10 rounded-md">
+        <div class="flex rounded-md shadow-xs justify-center mt-5 md:mt-8" role="group">
             <a href="{% url "dashboard" %}" type="button" class="px-4 py-2 text-sm md:text-lg font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
                 Total Events
             </a>
@@ -73,7 +73,7 @@
         </div>
 
         {% if events %}
-            <div class="relative overflow-x-auto shadow-md mt-5">
+            <div class="relative overflow-x-auto mt-8">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -124,8 +124,8 @@
                 </table>
             </div>
         {% else %}
-            <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">Sorry! No events available!!</h2>
+            <h2 class="px-2 my-10 text-center text-black text-lg sm:text-xl font-bold">Sorry! No events available!!</h2>
         {% endif %}
-    </section>
+    </div>
 </div>
 {% endblock dashboard %}

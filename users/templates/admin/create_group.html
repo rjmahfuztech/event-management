@@ -1,7 +1,7 @@
 {% extends "dashboard/manage_dashboard.html" %}
 
 {% block group %}
-<div class="max-w-[700px] mx-auto">
+<div class="max-w-[700px] mx-auto bg-white shadow-md border py-5 px-3 sm:px-10 rounded-md">
     <div class="flex justify-center">
         <h1 class="text-2xl md:text-3xl inline-block font-bold mt-3 mb-5 border-b-2 rounded-md border-slate-700">Create A New Group</h1>
     </div>
@@ -16,10 +16,10 @@
     </div>
     <form class="mt-2" method="POST">
         {% csrf_token %}
-        <button type="button" id="select-all" class="px-2 py-1 cursor-pointer rounded-md bg-black text-white">Select All</button>
-        <button type="button" id="deselect-all" class="px-2 py-1 cursor-pointer rounded-md bg-black text-white">Deselect All</button>
+        <button type="button" id="select-all" class="px-3 py-2 cursor-pointer rounded-sm bg-blue-700 hover:bg-black text-white transition-colors">Select All</button>
+        <button type="button" id="deselect-all" class="px-3 py-2 mb-3 cursor-pointer rounded-sm bg-blue-700 hover:bg-black text-white transition-colors">Deselect All</button>
         {{form}}
-        <button class="bg-black text-white font-semibold max-w-96 py-2 px-3 rounded-md hover:bg-gray-600 my-3" type="submit">Create Group</button>
+        <button class="w-full sm:w-80 p-3 font-bold text-white bg-orange-400 mt-3 mb-5" type="submit">Create Group</button>
     </form>
 </div>
 

@@ -1,6 +1,6 @@
 {% extends "dashboard/manage_dashboard.html" %}
 {% block profile %}
-<div class="max-w-[800px] mx-auto md:mt-8 h-screen">
+<div class="max-w-[800px] mx-auto md:mt-8 bg-white shadow-md border py-5 px-3 sm:px-10 rounded-md">
     <h1 class="text-center font-semibold mb-6 text-2xl">Update your profile</h1>
     <form method="POST", enctype='multipart/form-data'>
         {% csrf_token %}

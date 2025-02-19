@@ -23,6 +23,7 @@ select_query = Event.objects.select_related('category')
 def events_info(request):
     event_query = prefetch_query
     categories = Category.objects.all()
+
     # filter data
     get_data  = request.GET
     search_name = get_data.get('name', 'all')
@@ -197,20 +198,18 @@ def participant(request):
 
 @login_required
 def join_in_event(request, id):
-    event = Event.objects.prefetch_related('participant').get(id=id)
+    event = Event.objects.get(id=id)
     is_added = event.participant.filter(id=request.user.id).exists()
     if is_added == False:
         event.participant.add(request.user)
         messages.success(request, f"You are successfully booked this `{event.name}` event.")
         return redirect('my-event')
     else:
-        messages.error(request, f"Alert! You are Already booked this `{event.name}` event.")
-        return redirect('my-event')
+        return redirect('event-info')
     
 @login_required
 def user_booked_events(request):
-    user = User.objects.get(id=request.user.id)
-    user_events = Event.objects.filter(participant=user).select_related('category')
+    user_events = Event.objects.filter(participant=request.user).select_related('category')
     return render(request, "user_booked_event.html", {'user_events': user_events})
         
 

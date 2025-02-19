@@ -1,7 +1,7 @@
 {% extends "dashboard/manage_dashboard.html" %}
 {% load static %}
 {% block profile %}
-<div class="max-w-[800px] mx-auto">
+<div class="max-w-[800px] mx-auto md:mt-10 bg-white shadow-md border py-5 px-3 sm:px-10 rounded-md">
     <h1 class="text-xl sm:text-2xl text-center mb-10">Welcome <b>{{username}}</b> to your profile.</h1>
     <div>
         {% if messages %}
