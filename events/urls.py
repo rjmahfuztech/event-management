@@ -4,7 +4,6 @@ from events.views import events_info,dashboard,add_event,add_category,category,p
 
 urlpatterns = [
     path('', events_info, name='event-info'),
-    # path('event-details/<int:id>/', event_details, name='details'),
     path('event-details/<int:id>/', CustomEventDetailsView.as_view(), name='details'),
     path('dashboard/', dashboard, name='dashboard'),
     path('category/', category, name='category'),
@@ -13,7 +12,6 @@ urlpatterns = [
     path('delete-category/<int:id>/', delete_category, name='delete-category'),
     path('event/', event, name='event'),
     path('add-event/', add_event, name='add-event'),
-    # path('update-event/<int:id>/', update_event, name='update-event'),
     path('update-event/<int:id>/', CustomUpdateEventView.as_view(), name='update-event'),
     path('delete-event/<int:id>/', delete_event, name='delete-event'),
     path('users/admin/participant/', participant, name='participant'),

@@ -158,8 +158,7 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-# FRONTEND_URL = 'https://event-management-9oft.onrender.com'
-FRONTEND_URL = 'http://127.0.0.1:8000'
+FRONTEND_URL = 'https://event-management-9oft.onrender.com'
 
 LOGIN_URL = '/users/sign-in/'
 LOGIN_REDIRECT_URL = '/dashboard/'
