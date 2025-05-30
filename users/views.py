@@ -26,7 +26,7 @@ def sign_up(request):
             user.set_password(form.cleaned_data.get('password'))
             user.is_active = False
             user.save()
-            messages.success(request, 'A confirmation mail has been to you. Please check your E-Mail.')
+            messages.success(request, 'A confirmation mail has been sent to you. Please check your E-Mail.')
             return redirect('sign-in')
 
     return render(request, "authentication/register.html", {'form': form})
