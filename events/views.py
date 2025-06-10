@@ -22,6 +22,14 @@ select_query = Event.objects.select_related('category')
 # Create your views here.
 def events_info(request):
     event_query = prefetch_query
+
+    context ={
+        "limited_event": event_query.order_by('id')[:6],
+    }
+    return render(request, "event_info.html",context)
+
+def event_list(request):
+    event_query = prefetch_query
     categories = Category.objects.all()
 
     # filter data
@@ -43,11 +51,10 @@ def events_info(request):
         event_data = event_query.all()
 
     context ={
-        "limited_event": prefetch_query.order_by('id')[:6],
         "event_data": event_data,
         "categories": categories
     }
-    return render(request, "event_info.html",context)
+    return render(request, "event_list.html", context)
 
 
 # Class base view for event details
