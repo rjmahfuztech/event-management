@@ -43,6 +43,7 @@ def events_info(request):
         event_data = event_query.all()
 
     context ={
+        "limited_event": prefetch_query.order_by('id')[:6],
         "event_data": event_data,
         "categories": categories
     }
