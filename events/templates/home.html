@@ -4,13 +4,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="{{ meta_description|default:'Manage your even without effort.' }}">
+    <meta name="keywords" content="{{ meta_keywords|default:'event, manage' }}">
     <title>Event</title>
     {% comment %} <link rel="stylesheet" href="{% static "css/output.css" %}"> {% endcomment %}
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
   </head>
   <body class="bg-[#EFF3F8]">
-    <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b mb-10 border-gray-200 dark:border-gray-600">
+    <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 shadow-sm mb-10 border-gray-200 dark:border-gray-600">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{% url 'event-info' %}"
            class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -32,43 +35,72 @@
             </svg>
           </button>
         </div>
-        <div class="items-center justify-end hidden w-full md:flex md:w-auto md:order-1"
+        <div class="items-center justify-end hidden w-full md:flex md:w-auto md:order-1 overflow-hidden md:max-h-full"
              id="navbar-sticky">
-          <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul class="flex flex-col items-center p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <a href="{% url "event-info" %}"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Home</a>
+                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Home</a>
+            </li>
+            <li>
+              <a href="{% url "event-list" %}"
+                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Events</a>
             </li>
             <li>
               <a href="#about"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
             </li>
             <li>
               <a href="#contact"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
             </li>
             {% if user.is_authenticated %}
               <li>
                 <a href="{% url "dashboard" %}"
-                   class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</a>
+                   class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</a>
               </li>
               <li>
-                <form action="{% url "sign-out" %}" method="POST">
-                  {% csrf_token %}
-                  <button type="submit"
-                          class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                    LogOut
-                  </button>
-                </form>
+                <img id="avatarButton"
+                     type="button"
+                     data-dropdown-toggle="userDropdown"
+                     data-dropdown-placement="bottom-start"
+                     class="w-10 h-10 rounded-full cursor-pointer"
+                     src="{{ user.profile_image.url }}"
+                     alt="User dropdown">
+                <!-- Dropdown menu -->
+                <div id="userDropdown"
+                     class="z-10 hidden bg-slate-100 rounded-lg shadow-sm w-44 relative  !-left-20">
+                  <div class="px-4 pt-3 text-center text-sm text-gray-900 dark:text-white border-b pb-2">
+                    <h4 class="mb-2">{{ user.username }}</h4>
+                    <p class="font-medium">{{ user.email }}</p>
+                  </div>
+                  <div class="py-1 text-center bg-slate-200">
+                    <form action="{% url "sign-out" %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit"
+                              class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-700 transition-colors duration-300">
+                        Sign out
+                      </button>
+                    </form>
+                  </div>
+                </div>
               </li>
             {% else %}
               <li>
-                <a href="{% url "sign-in" %}"
-                   class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Login</a>
+                <a href="{% url "sign-in" %}">
+                  <button type="button"
+                          class="text-red-700 text-sm hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 transition-all duration-300 font-medium rounded-lg px-5 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                    Login
+                  </button>
+                </a>
               </li>
-              <li>
-                <a href="{% url "sign-up" %}"
-                   class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Sign Up</a>
+              <li class="mt-2 md:mt-0 md:!ml-2">
+                <a href="{% url "sign-up" %}">
+                  <button type="button"
+                          class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 transition-colors duration-300 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                    Sign Up
+                  </button>
+                </a>
               </li>
             {% endif %}
           </ul>
@@ -87,6 +119,34 @@
       {% endblock form %}
     </main>
     {% include "footer.html" %}
+    {% comment %} Top scrolling fix button  {% endcomment %}
+    <div id="scrollTopButton"
+         class="fixed bottom-0 right-5 opacity-0 invisible transition-all duration-300 ease-in-out rounded-full shadow-lg z-50">
+      <svg onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+           xmlns="http://www.w3.org/2000/svg"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke-width="2"
+           stroke="currentColor"
+           class="size-8 md:size-9 text-red-500 bg-black p-1 rounded-full cursor-pointer hover:bg-gray-700 transition-colors duration-300">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+      </svg>
+    </div>
   </body>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script>
+    // get the current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+    // scroll to top function
+    const scrollTopButton = document.getElementById("scrollTopButton");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+      scrollTopButton.classList.remove("opacity-0", "invisible", "bottom-0");
+      scrollTopButton.classList.add("opacity-100", "visible", "bottom-8");
+      } else {
+        scrollTopButton.classList.remove("opacity-100", "visible", "bottom-8");
+        scrollTopButton.classList.add("opacity-0", "invisible", "bottom-0");
+      }
+    })
+  </script>
 </html>
