@@ -20,7 +20,7 @@
     <section>
         <h1 class="text-xl mt-10 md:mt-14 md:text-4xl mb-8 text-center py-2 font-bold">OUR EVENT</h1>
         {% if limited_event.exists %}
-            <div class="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {% for event in limited_event %}
                     <div class=" bg-white border border-gray-200 rounded-lg shadow-sm ">
                         {% if event.image %}
@@ -77,5 +77,8 @@
             </h2>
         {% endif %}
     </section>
+    {% comment %} blog section {% endcomment %}
+    {% include "blog.html" %}
+    {% comment %} contact section {% endcomment %}
     {% include "sections.html" %}
 {% endblock event %}

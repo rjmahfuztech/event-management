@@ -1,0 +1,100 @@
+{% load static %}
+<section id="blog" class="mt-5">
+  <h3 class="text-red-600 text-center font-semibold text-2xl">Blog</h3>
+  <h2 class="text-3xl md:text-4xl mt-2 font-bold text-center">LATEST BLOG</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-10">
+    {% comment %} 1 {% endcomment %}
+    <div class="group bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div class="overflow-hidden">
+        <a href="#">
+          <img class="rounded-t-lg max-h-[300px] w-full group-hover:scale-105 transition-transform duration-500"
+               src="{% static "images/blog1.jpeg" %}"
+               alt="" />
+        </a>
+      </div>
+      <div class="p-5">
+        <a href="#">
+          <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-red-600 transition-colors duration-300">
+            Vestibulum nec porta erat. In in lobo turpis Suspendisse rtis.
+          </h5>
+        </a>
+        <div class="flex gap-4 justify-between mt-4 text-sm text-red-600 font-semibold">
+          <p class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+            </svg>
+            <span>2 September, 2024</span>
+          </p>
+          <a class="underline" href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+    {% comment %} 2 {% endcomment %}
+    <div class="group bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div class="overflow-hidden">
+        <a href="#">
+          <img class="rounded-t-lg max-h-[300px] w-full group-hover:scale-105 transition-transform duration-500"
+               src="{% static "images/blog2.jpeg" %}"
+               alt="" />
+        </a>
+      </div>
+      <div class="p-5">
+        <a href="#">
+          <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-red-600 transition-colors duration-300">
+            Fusce posuere justo vitae varius elit laoreet Mauris sollicitudin  at.
+          </h5>
+        </a>
+        <div class="flex gap-4 justify-between mt-4 text-sm text-red-600 font-semibold">
+          <p class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+            </svg>
+            <span>24 November, 2024</span>
+          </p>
+          <a class="underline" href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+    {% comment %} 3 {% endcomment %}
+    <div class="group bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div class="overflow-hidden">
+        <a href="#">
+          <img class="rounded-t-lg max-h-[300px] w-full group-hover:scale-105 transition-transform duration-500"
+               src="{% static "images/blog3.jpeg" %}"
+               alt="" />
+        </a>
+      </div>
+      <div class="p-5">
+        <a href="#">
+          <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-red-600 transition-colors duration-300">
+            Nam a lacus et lorem pellentesque cursus. Etiam sed gravida.
+          </h5>
+        </a>
+        <div class="flex gap-4 justify-between mt-4 text-sm text-red-600 font-semibold">
+          <p class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="size-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+            </svg>
+            <span>8 March, 2025</span>
+          </p>
+          <a class="underline" href="#">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
