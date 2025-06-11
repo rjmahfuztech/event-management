@@ -9,8 +9,8 @@
     <meta name="keywords" content="{{ meta_keywords|default:'event, manage' }}">
     <title>Event</title>
     {% comment %} <link rel="stylesheet" href="{% static "css/output.css" %}"> {% endcomment %}
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
       html {
         scroll-behavior: smooth;
@@ -19,6 +19,26 @@
         -webkit-text-stroke: 2px black;
         color: transparent;             
       }
+      .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     </style>
   </head>
   <body class="bg-[#EFF3F8]">
@@ -55,12 +75,16 @@
                  class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Events</a>
             </li>
             <li>
-              <a href="/#blog"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Blog</a>
+              <a href="/#speaker"
+                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Speaker</a>
             </li>
             <li>
               <a href="/#about"
                  class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+            </li>
+            <li>
+              <a href="/#blog"
+                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Blog</a>
             </li>
             <li>
               <a href="/#contact"
@@ -145,6 +169,9 @@
       </svg>
     </div>
   </body>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     // get the current year
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -160,5 +187,16 @@
         scrollTopButton.classList.add("opacity-0", "invisible", "bottom-0");
       }
     })
+
+    // initialize swiper
+    const swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
   </script>
 </html>
