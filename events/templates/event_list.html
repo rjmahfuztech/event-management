@@ -4,12 +4,12 @@
   <div class="mt-32">
     {% comment %} Search Section {% endcomment %}
     <section class="bg-white shadow-md rounded-md p-5 md:p-9 md:pb-14">
-      <h2 class="text-2xl text-center md:text-left md:text-4xl mb-3 md:mb-0 text-black font-semibold md:relative left-20">
-        SEARCH THE BEST EVENT!
-      </h2>
-      <h2 class="text-xl text-center md:text-left mb-3 md:mb-0 text-black font-semibold md:relative left-20">
-        Search events by name or category or both or Start and End date
-      </h2>
+      <div class="md:ml-20">
+        <h2 class="text-2xl text-center md:text-left md:text-4xl md:mb-0 text-black font-bold">SEARCH THE BEST EVENT!</h2>
+        <h2 class="text-xl text-center md:text-left mb-3 md:mb-0 text-black font-semibold">
+          Search events by name or category or both or Start and End date
+        </h2>
+      </div>
       {% comment %} for name or category or both filter  {% endcomment %}
       <form class="md:flex gap-3 md:px-20 justify-between md:pt-14"
             action="{% url "event-list" %}"
