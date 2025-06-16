@@ -51,9 +51,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 14px;
+      gap: 20px;
       opacity: 80%;
-      margin: 0 6rem;
+      margin: 0 4rem;
       padding: 10px !important;
       border-radius: 10px;
       opacity: 0;
@@ -87,6 +87,13 @@
     }
     .swiper-pagination-bullet-active {
       background-color: #991B1B;
+    }
+    {% comment %} responsive  {% endcomment %}
+    @media screen and (max-width: 480px) {
+      .social {
+        margin: 0 2.5rem;
+        gap: 14px;
+      }
     }
     </style>
   </head>
