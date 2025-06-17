@@ -1,0 +1,35 @@
+{% load static %}
+<section id="about" class="mb-14 md:mb-20">
+  <div class="my-10 md:my-14 text-center">
+    <h3 class="text-red-600 font-semibold text-2xl">About</h3>
+    <h2 class="text-3xl md:text-5xl mt-2 font-bold">
+      ABOUT <span class="text-outline">US</span>
+    </h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 my-10">
+    <div class="ok">
+      <h4 class="text-red-600 text-sm">ABOUT US</h4>
+      <h2 class="text-2xl md:text-3xl font-bold">We Help Corporate to Manage Event</h2>
+      <p class="text-gray-400 mt-4">
+        At our core, we specialize in simplifying event management for corporate teams. Whether it's a large-scale conference, internal training, product launch, or annual celebration, we provide a smart and efficient platform that takes care of every detail — from planning to execution.
+        With our intuitive system, companies can effortlessly organize, track, and manage all aspects of their events in one place. Our tools help streamline communication, registration, scheduling, budgeting, and reporting — so your team can focus on creating impactful experiences rather than handling the chaos.
+        We believe every corporate event should run smoothly, impress attendees, and deliver measurable results — and our platform is built to make that happen.
+      </p>
+      <div class="mt-6 grid grid-cols-2 bg-[#EDEDED] p-10 items-center">
+        <div class="text-center border-r border-r-gray-800">
+          <h3 class="text-gray-800 text-3xl font-bold">1994</h3>
+          <p class="text-xs text-gray-400">ESTABLISHED</p>
+        </div>
+        <div class="text-center">
+          <h3 class="text-gray-800 text-3xl font-bold">120</h3>
+          <p class="text-xs text-gray-400">EMPLOYEE</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <img class="w-full rounded-lg"
+           src="{% static "images/about.jpeg" %}"
+           alt="Team picture">
+    </div>
+  </div>
+</section>
