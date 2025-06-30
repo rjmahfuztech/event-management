@@ -84,27 +84,6 @@ DATABASES = {
     }
 }
 
-# our database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'event_management',
-#         'USER': 'postgres',
-#         'PASSWORD': 'password',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://event_management_db_eb96_user:yUbay9MCuJxs27Bxm4B8RF3ye0FjyoTF@dpg-cuq2khlsvqrc73f6nceg-a.oregon-postgres.render.com/event_management_db_eb96',
-#         conn_max_age=600
-#     )
-# }
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {

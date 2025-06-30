@@ -1,131 +1,114 @@
 {% extends "dashboard/manage_dashboard.html" %}
-
 {% block dashboard %}
-<div>
-    <div class="grid grid-cols gap-4 lg:grid-cols-5 py-4">
-        <div class="lg:col-span-3">
-            <div class="grid grid-cols md:grid-cols-2 gap-4">
-                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Participants: {{total_participant}}</h2>
-                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Events: {{count.total_event}}</h2>
-                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Upcoming Events: {{count.total_upcoming}}</h2>
-                <h2 class="shadow-md bg-white hover:shadow-2xl transition-all p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">Total Past Events: {{count.total_past}}</h2>
+    <div>
+        <div class="grid grid-cols gap-4 lg:grid-cols-5 py-4">
+            <div class="lg:col-span-3">
+                <div class="grid grid-cols md:grid-cols-2 gap-4">
+                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
+                        Total Participants: {{ total_participant }}
+                    </h2>
+                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
+                        Total Events: {{ count.total_event }}
+                    </h2>
+                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
+                        Total Upcoming Events: {{ count.total_upcoming }}
+                    </h2>
+                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
+                        Total Past Events: {{ count.total_past }}
+                    </h2>
+                </div>
+            </div>
+            <div class="lg:col-span-2 overflow-x-auto shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-2">
+                {% comment %} Events Scheduled For Today {% endcomment %}
+                <h2 class="max-w-80 mx-auto text-center justify-center border-b-4 border-orange-400 text-lg sm:text-2xl font-bold">
+                    Events Scheduled For Today
+                </h2>
+                {% if todays_event %}
+                    <div class="relative mt-5">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Title</th>
+                                    <th scope="col" class="px-6 py-3">Category</th>
+                                    <th scope="col" class="px-6 py-3">Location</th>
+                                    <th scope="col" class="px-6 py-3">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in todays_event %}
+                                    <tr class="bg-white border-b dark:bg-gray-800 text-black dark:border-gray-700 border-gray-200">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ event.name }}
+                                        </th>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ event.category.name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ event.location }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ event.time }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">
+                        No events available for today!!
+                    </h2>
+                {% endif %}
             </div>
         </div>
-        <div class="lg:col-span-2 overflow-x-auto shadow-md bg-white hover:shadow-2xl transition-all p-2">
-            {% comment %} Events Scheduled For Today {% endcomment %}
-            <h2 class="max-w-80 mx-auto text-center justify-center border-b-4 border-orange-400 text-lg sm:text-2xl font-bold">Events Scheduled For Today</h2>
-            {% if todays_event %}
-                <div class="relative mt-5">
+        {% comment %} Interactive Stats {% endcomment %}
+        <div class="bg-white shadow-sm py-5 px-3 sm:px-10 rounded-md">
+            <div class="flex rounded-md shadow-xs justify-center mt-5 md:mt-8"
+                 role="group">
+                <a href="{% url "dashboard" %}"
+                   type="button"
+                   class="px-4 py-2 text-sm md:text-lg font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    Total Events
+                </a>
+                <a href="{% url "dashboard" %}?type=upcoming"
+                   type="button"
+                   class="px-4 py-2 text-sm md:text-lg font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    Upcoming Events
+                </a>
+                <a href="{% url "dashboard" %}?type=past"
+                   type="button"
+                   class="px-4 py-2 text-sm md:text-lg font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                    Past Events
+                </a>
+            </div>
+            {% if events %}
+                <div class="relative overflow-x-auto mt-8">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Title
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Category
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Location
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Time
-                                </th>
+                                <th scope="col" class="px-6 py-3">Title</th>
+                                <th scope="col" class="px-6 py-3">Description</th>
+                                <th scope="col" class="px-6 py-3">Category</th>
+                                <th scope="col" class="px-6 py-3">Location</th>
+                                <th scope="col" class="px-6 py-3">Date</th>
+                                <th scope="col" class="px-6 py-3">Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for event in todays_event %}
+                            {% for event in events %}
                                 <tr class="bg-white border-b dark:bg-gray-800 text-black dark:border-gray-700 border-gray-200">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{event.name}}
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ event.name }}
                                     </th>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{event.category.name}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{event.location}}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{event.time}}
-                                    </td>
+                                    <td class="px-6 py-4 min-w-80">{{ event.description }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ event.category.name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ event.location }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ event.date }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ event.time }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             {% else %}
-                <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">No events available for today!!</h2>
+                <h2 class="px-2 my-10 text-center text-black text-lg sm:text-xl font-bold">Sorry! No events available!!</h2>
             {% endif %}
         </div>
     </div>
-    {% comment %} Interactive Stats {% endcomment %}
-    <div class="bg-white shadow-md border py-5 px-3 sm:px-10 rounded-md">
-        <div class="flex rounded-md shadow-xs justify-center mt-5 md:mt-8" role="group">
-            <a href="{% url "dashboard" %}" type="button" class="px-4 py-2 text-sm md:text-lg font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                Total Events
-            </a>
-            <a href="{% url "dashboard" %}?type=upcoming" type="button" class="px-4 py-2 text-sm md:text-lg font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                Upcoming Events
-            </a>
-            <a href="{% url "dashboard" %}?type=past" type="button" class="px-4 py-2 text-sm md:text-lg font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                Past Events
-            </a>
-        </div>
-
-        {% if events %}
-            <div class="relative overflow-x-auto mt-8">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Title
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Description
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Category
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Location
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Date
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Time
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for event in events %}
-                            <tr class="bg-white border-b dark:bg-gray-800 text-black dark:border-gray-700 border-gray-200">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{event.name}}
-                                </th>
-                                <td class="px-6 py-4 min-w-80">
-                                    {{event.description}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{event.category.name}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{event.location}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{event.date}}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{event.time}}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% else %}
-            <h2 class="px-2 my-10 text-center text-black text-lg sm:text-xl font-bold">Sorry! No events available!!</h2>
-        {% endif %}
-    </div>
-</div>
 {% endblock dashboard %}

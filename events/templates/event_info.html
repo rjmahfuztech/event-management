@@ -1,16 +1,26 @@
 {% extends "home.html" %}
 {% load static %}
 {% block header %}
-    <header class="bg-[url({% static 'images/bg1.jpg' %})] w-full h-screen bg-cover bg-center pt-20 relative">
-        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-        {% comment %} Banner section {% endcomment %}
-        <section class="absolute inset-0 z-10 flex items-center justify-center">
-            <div class="w-96 md:w-[600px] p-2">
-                <h3 class="text-lg md:text-xl font-semibold text-white mb-2 md:mb-4">WELCOME TO,</h3>
-                <h1 class="text-2xl md:text-5xl font-bold text-white">The World’s Best Event Management Agency for Corporate</h1>
-                <p class="text-white mt-2 md:mt-4 font-semibold">
-                    A integer hac in id. Mollis consequat, consectetur egestas in quam. Id velit eleifend tincidunt varius sagittis sed ut. Pretium, risus ac augue arcu ullamcorper semper integer
+    <header class="relative w-full h-screen bg-cover bg-center pt-20"
+            style="background-image: url('{% static 'images/banner-img.jpg' %}')">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50"></div>
+        <!-- Content -->
+        <section class="relative z-10 flex items-center justify-center h-full text-center px-4">
+            <div class="max-w-3xl">
+                <h3 class="text-sm md:text-lg font-medium text-red-600 tracking-widest uppercase mb-4">Welcome to</h3>
+                <h1 class="text-3xl md:text-5xl xl:text-6xl font-bold text-slate-100 leading-tight mb-4">
+                    The World’s Best Event Management Agency for Corporate Events
+                </h1>
+                <p class="text-slate-100 text-sm md:text-lg font-light md:font-normal leading-relaxed mt-6">
+                    We bring your events to life with professional planning, seamless execution, and unforgettable experiences. Join hundreds of happy clients who trust us to make their events spectacular.
                 </p>
+                <a href="{% url "event-list" %}">
+                    <button type="button"
+                            class="text-gray-900 w-40 mt-5 bg-slate-100 border border-gray-300 focus:outline-none hover:bg-red-600 transition-colors duration-500 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">
+                        RSVP NOW
+                    </button>
+                </a>
             </div>
         </section>
     </header>
