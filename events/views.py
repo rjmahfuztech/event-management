@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_admin
 from django.views.generic import DetailView, UpdateView
 from django.utils.decorators import method_decorator
-from django.urls import reverse_lazy
 User = get_user_model()
 
 # Test
@@ -33,22 +32,26 @@ def event_list(request):
     categories = Category.objects.all()
 
     # filter data
-    get_data  = request.GET
-    search_name = get_data.get('name', 'all')
-    choice = get_data.get('category', 'all')
-    start_date = get_data.get('start-date', 'all')
-    end_date = get_data.get('end-date', 'all')
+    get_date = request.GET
+    search_by_name = get_date.get('name', '').strip()
+    choices = get_date.get('category', '').strip()
+    start_date = get_date.get('start-date', '').strip()
+    end_date = get_date.get('end-date', '').strip()
+    
+    # for safely filter
+    filters = {}
 
-    if search_name != 'all' and choice != 'all':
-        event_data = event_query.filter(name__icontains=search_name, category=choice)
-    elif start_date != 'all' and end_date != 'all':
-        event_data = event_query.filter(date__gte=start_date, date__lte=end_date)
-    elif search_name != 'all':
-        event_data = event_query.filter(name__icontains=search_name)
-    elif choice != 'all':
-        event_data = event_query.filter(category=choice)
-    else:
-        event_data = event_query.all()
+    if search_by_name:
+        filters['name__icontains'] = search_by_name
+    if choices:
+        filters['category'] = choices
+    if start_date and end_date:
+        try:
+            filters['date__range'] = [start_date, end_date]
+        except:
+            pass # if invalid date format comes then ignore.
+
+    event_data = event_query.filter(**filters);
 
     context ={
         "event_data": event_data,
