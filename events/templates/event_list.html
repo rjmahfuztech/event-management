@@ -93,11 +93,11 @@
                 </p>
               </div>
               <div class="p-5 relative overflow-hidden">
-                <div class="ml-10">
-                  <h5 class="mb-2 text-xl lg:text-2xl font-bold tracking-tight text-gray-900 group-hover:text-red-600 transition-colors duration-300">
+                <div class="ml-7">
+                  <h5 class="mb-2 text-xl text-center lg:text-2xl font-bold tracking-tight text-gray-900 group-hover:text-red-600 transition-colors duration-300">
                     {{ event.name }}
                   </h5>
-                  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ event.description|slice:"0:80" }}...</p>
+                  <p class="mb-3 font-normal text-center text-gray-700">{{ event.description|slice:"0:80" }}...</p>
                   <div class="mt-5 flex justify-center items-center gap-6">
                     {% if user in event.participant.all %}
                       <a class="underline text-red-950 cursor-not-allowed font-semibold">Already RSVP</a>
