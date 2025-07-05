@@ -58,7 +58,6 @@ def event_list(request):
 
 
 # Class base view for event details
-@method_decorator(login_required, name='dispatch')
 class CustomEventDetailsView(DetailView):
     model = Event
     template_name = 'event_details.html'
