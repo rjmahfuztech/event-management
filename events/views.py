@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_admin
 from django.views.generic import DetailView, UpdateView
 from django.utils.decorators import method_decorator
+from django.core.paginator import Paginator
 User = get_user_model()
 
 # Test
@@ -16,11 +17,10 @@ def is_organizer_or_admin(user):
     return user.groups.filter(Q(name='Organizer') | Q(name='Admin')).exists()
 
 ## Common Query
-prefetch_query = Event.objects.prefetch_related('participant')
-select_query = Event.objects.select_related('category')
+event_optimized_query = Event.objects.select_related('category').prefetch_related('participant').all()
 # Create your views here.
 def events_info(request):
-    event_query = prefetch_query
+    event_query = event_optimized_query
 
     context ={
         "limited_event": event_query.order_by('id')[:6],
@@ -28,15 +28,15 @@ def events_info(request):
     return render(request, "event_info.html",context)
 
 def event_list(request):
-    event_query = prefetch_query
+    event_query = event_optimized_query
     categories = Category.objects.all()
 
     # filter data
     get_date = request.GET
     search_by_name = get_date.get('name', '').strip()
     choices = get_date.get('category', '').strip()
-    start_date = get_date.get('start-date', '').strip()
-    end_date = get_date.get('end-date', '').strip()
+    start_date = get_date.get('start_date', '').strip()
+    end_date = get_date.get('end_date', '').strip()
     
     # for safely filter
     filters = {}
@@ -53,9 +53,22 @@ def event_list(request):
 
     event_data = event_query.filter(**filters);
 
+    # Pagination
+    paginator = Paginator(event_data, 6)
+    page_number = request.GET.get('page')
+    page_object = paginator.get_page(page_number)
+
+    # Remove `page` param and build query string
+    querydict = request.GET.copy()
+    if 'page' in querydict:
+        querydict.pop('page')
+    query_string = querydict.urlencode()
+
     context ={
-        "event_data": event_data,
-        "categories": categories
+        "categories": categories,
+        "page_obj": page_object,
+        "get_data": get_date,
+        "query_string": query_string
     }
     return render(request, "event_list.html", context)
 
@@ -73,7 +86,7 @@ class CustomEventDetailsView(DetailView):
 
 @login_required
 def dashboard(request):
-    events_query = select_query
+    events_query = event_optimized_query
     type = request.GET.get('type', 'all')
 
     # filtering by date
@@ -107,7 +120,7 @@ def dashboard(request):
 @login_required
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def event(request):
-    events = select_query.all()
+    events = event_optimized_query
     context = {
         'events': events 
     }

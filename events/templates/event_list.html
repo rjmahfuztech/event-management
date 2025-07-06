@@ -3,56 +3,6 @@
 {% block event %}
   <div class="mt-32">
     {% comment %} Search Section {% endcomment %}
-    {% comment %} <section class="bg-white shadow-xl rounded-2xl px-6 md:px-16 py-10 space-y-10">
-      <!-- Heading -->
-      <div class="text-center md:text-left space-y-3">
-        <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">🎉 Discover Events That Matter</h2>
-        <p class="text-gray-600 text-lg">Search events by name, category, or filter with a custom date range.</p>
-      </div>
-      <!-- Search by Name and Category -->
-      <form action="{% url 'event-list' %}" method="GET" class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {% csrf_token %}
-        <!-- Name Field -->
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Event Name</label>
-          <input type="text" name="name" id="name" placeholder="Enter event name" class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-red-500 focus:border-red-500" />
-        </div>
-        <!-- Category Field -->
-        <div>
-          <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-          <select name="category" id="category" class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-red-500 focus:border-red-500">
-            <option value="all">All Categories</option>
-            {% for category in categories %}<option value="{{ category.id }}">{{ category.name }}</option>{% endfor %}
-          </select>
-        </div>
-        <!-- Submit Button -->
-        <div class="flex items-end">
-          <button type="submit" class="w-full py-3.5 bg-red-700 hover:bg-black text-white font-semibold rounded-xl transition duration-300">
-            Search Events
-          </button>
-        </div>
-      </form>
-      <!-- Date Filter -->
-      <form action="{% url 'event-list' %}" method="GET" class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
-        {% csrf_token %}
-        <!-- Start Date -->
-        <div>
-          <label for="start" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-          <input type="date" name="start-date" id="start" required onclick="this.showPicker && this.showPicker()" class="w-full px-4 py-3 border cursor-pointer border-gray-300 rounded-xl shadow-sm focus:ring-red-500 focus:border-red-500" />
-        </div>
-        <!-- End Date -->
-        <div>
-          <label for="end" class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-          <input type="date" name="end-date" id="end" required onclick="this.showPicker && this.showPicker()" class="w-full px-4 py-3 border cursor-pointer border-gray-300 rounded-xl shadow-sm focus:ring-red-500 focus:border-red-500" />
-        </div>
-        <!-- Date Filter Submit -->
-        <div class="flex items-end">
-          <button type="submit" class="w-full py-3.5 bg-red-700 hover:bg-black text-white font-semibold rounded-xl transition duration-300">
-            Filter by Date
-          </button>
-        </div>
-      </form>
-    </section> {% endcomment %}
     <section class="bg-slate-50 rounded-md px-6 md:px-16 py-14 space-y-12">
       <!-- Heading -->
       <div class="text-center space-y-2">
@@ -100,7 +50,7 @@
         <div>
           <label for="start" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
           <input type="date"
-                 name="start-date"
+                 name="start_date"
                  id="start"
                  onclick="this.showPicker && this.showPicker()"
                  class="w-full px-4 py-2 border border-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-red-500 focus:border-red-500 shadow-sm" />
@@ -109,7 +59,7 @@
         <div>
           <label for="end" class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
           <input type="date"
-                 name="end-date"
+                 name="end_date"
                  id="end"
                  onclick="this.showPicker && this.showPicker()"
                  class="w-full px-4 py-2 border border-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-red-500 focus:border-red-500 shadow-sm" />
@@ -139,9 +89,9 @@
           ALL <span class="text-outline">EVENTS</span>
         </h2>
       </div>
-      {% if event_data.exists %}
+      {% if page_obj.object_list %}
         <div class="grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {% for event in event_data %}
+          {% for event in page_obj %}
             <div class="group bg-white border border-gray-200 rounded-lg shadow-sm">
               <div class="overflow-hidden relative rounded-t-lg">
                 {% if event.image %}
@@ -195,5 +145,63 @@
         </h2>
       {% endif %}
     </section>
+    {% comment %} Pagination  {% endcomment %}
+    {% if page_obj.paginator.num_pages > 1 %}
+      <div class="flex relative sm:static justify-center items-center mt-20 mb-10 sm:mt-14 gap-2 sm:gap-4 font-medium">
+        {% if page_obj.has_previous %}
+          <div class="flex items-center gap-2 sm:gap-4">
+            <a class="flex items-center gap-1 hover:text-red-700 transition-colors duration-300"
+               href="?{{ query_string }}&page=1">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke-width="1.5"
+                   stroke="currentColor"
+                   class="size-3 sm:size-4 mt-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+              </svg>
+            first</a>
+            <a href="?{{ query_string }}&page={{ page_obj.previous_page_number }}"
+               class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-red-700 hover:text-white hover:border-red-300 transition-colors duration-300">
+              <svg class="w-2.5 sm:w-3.5 h-2.5 sm:h-3.5 me-2 rtl:rotate-180"
+                   aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
+              </svg>
+              Previous
+            </a>
+          </div>
+        {% endif %}
+        <span class="absolute sm:static bottom-10 sm:bottom-0">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+        {% if page_obj.has_next %}
+          <div class="flex items-center gap-2 sm:gap-4">
+            <a href="?{{ query_string }}&page={{ page_obj.next_page_number }}"
+               class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-red-700 hover:text-white hover:border-red-300 transition-colors duration-300">
+              Next
+              <svg class="w-2.5 sm:w-3.5 h-2.5 sm:h-3.5 ms-2 rtl:rotate-180"
+                   aria-hidden="true"
+                   xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+              </svg>
+            </a>
+            <a class="flex items-center gap-1 hover:text-red-700 transition-colors duration-300"
+               href="?{{ query_string }}&page={{ page_obj.paginator.num_pages }}">last
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke-width="1.5"
+                   stroke="currentColor"
+                   class="size-3 sm:size-4 mt-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+              </svg>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 {% endblock event %}
