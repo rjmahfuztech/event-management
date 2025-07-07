@@ -17,7 +17,7 @@ def is_organizer_or_admin(user):
     return user.groups.filter(Q(name='Organizer') | Q(name='Admin')).exists()
 
 ## Common Query
-event_optimized_query = Event.objects.select_related('category').prefetch_related('participant').all()
+event_optimized_query = Event.objects.select_related('category').prefetch_related('participant').all().order_by('id')
 # Create your views here.
 def events_info(request):
     event_query = event_optimized_query
@@ -67,7 +67,7 @@ def event_list(request):
     context ={
         "categories": categories,
         "page_obj": page_object,
-        "get_data": get_date,
+        # "get_data": get_date,
         "query_string": query_string
     }
     return render(request, "event_list.html", context)
@@ -97,8 +97,18 @@ def dashboard(request):
     elif type == 'past':
         events = events_query.filter(date__lt=date.today())
     else:
-        events = events_query.all()
+        events = events_query
 
+    # pagination
+    paginator = Paginator(events, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Remove `page` param and build query string
+    querydict = request.GET.copy()
+    if 'page' in querydict:
+        querydict.pop('page')
+    query_string = querydict.urlencode()
 
     # counting
     total_participant = User.objects.all().count()
@@ -108,7 +118,8 @@ def dashboard(request):
         total_past=Count('id', filter=Q(date__lt=date.today())),
     )
     context ={
-        "events": events,
+        "page_obj": page_obj,
+        "query_string": query_string,
         "todays_event": todays_event,
         "count": count,
         "total_participant": total_participant
@@ -121,8 +132,14 @@ def dashboard(request):
 @user_passes_test(is_organizer_or_admin, login_url='no-permission')
 def event(request):
     events = event_optimized_query
+
+    # pagination
+    paginator = Paginator(events, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'events': events 
+        'page_obj': page_obj 
     }
     return render(request, "event.html", context)
 
