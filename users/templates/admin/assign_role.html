@@ -1,13 +1,16 @@
 {% extends "dashboard/manage_dashboard.html" %}
 {% block group %}
-<section class="max-w-[600px] mx-auto mt-10">
-    <div class="flex justify-center mb-3">
-        <h1 class="text-lg lg:text-3xl whitespace-nowrap inline-block font-bold mt-3 mb-5 border-b-2 rounded-md border-slate-700">Change Role</h1>
-    </div>
-    <form method="POST">
-        {% csrf_token %}
-        {{form}}
-        <button class="w-52 sm:w-80 p-3 font-bold text-white bg-orange-400 mt-3 mb-5" type="submit">Change Role</button>
-    </form>
-</section>
+    <section class="max-w-[600px] mx-auto mt-10">
+        <div class="flex justify-center mb-3">
+            <h1 class="text-lg lg:text-3xl whitespace-nowrap inline-block font-bold mt-3 mb-5 border-b-2 rounded-md border-slate-700">
+                Change Role
+            </h1>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button class="w-52 sm:w-80 p-3 font-bold text-white bg-orange-400 mt-3 mb-5"
+                    type="submit">Change Role</button>
+        </form>
+    </section>
 {% endblock group %}
