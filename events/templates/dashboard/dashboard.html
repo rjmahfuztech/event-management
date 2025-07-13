@@ -1,60 +1,133 @@
 {% extends "dashboard/manage_dashboard.html" %}
 {% block dashboard %}
     <div>
-        <div class="grid grid-cols gap-4 lg:grid-cols-5 py-4">
-            <div class="lg:col-span-3">
-                <div class="grid grid-cols md:grid-cols-2 gap-4">
-                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
-                        Total Participants: {{ total_participant }}
-                    </h2>
-                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
-                        Total Events: {{ count.total_event }}
-                    </h2>
-                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
-                        Total Upcoming Events: {{ count.total_upcoming }}
-                    </h2>
-                    <h2 class="shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-4 md:py-10 md:px-8 text-center text-lg sm:text-xl font-semibold">
-                        Total Past Events: {{ count.total_past }}
-                    </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-6">
+            <!-- Total Participants -->
+            <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-center justify-between p-6">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-500 uppercase">Total Participants</h4>
+                        <h2 class="text-3xl font-bold text-gray-800">{{ total_participant }}</h2>
+                    </div>
+                    <div class="w-12 h-12 bg-green-500 text-white flex items-center justify-center rounded-full">
+                        <!-- Users Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="2"
+                             stroke="currentColor"
+                             class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
-            <div class="lg:col-span-2 overflow-x-auto shadow-sm bg-white hover:shadow-lg transition-all duration-300 p-2">
-                {% comment %} Events Scheduled For Today {% endcomment %}
-                <h2 class="max-w-80 mx-auto text-center justify-center border-b-4 border-orange-400 text-lg sm:text-2xl font-bold">
-                    Events Scheduled For Today
-                </h2>
-                {% if todays_event %}
-                    <div class="relative mt-5">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Title</th>
-                                    <th scope="col" class="px-6 py-3">Category</th>
-                                    <th scope="col" class="px-6 py-3">Location</th>
-                                    <th scope="col" class="px-6 py-3">Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for event in todays_event %}
-                                    <tr class="bg-white border-b dark:bg-gray-800 text-black dark:border-gray-700 border-gray-200">
-                                        <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ event.name }}
-                                        </th>
-                                        <td class="px-6 py-4 whitespace-nowrap dark:text-white">{{ event.category.name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap dark:text-white">{{ event.location }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap dark:text-white">{{ event.time }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+            <!-- Total Events -->
+            <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-center justify-between p-6">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-500 uppercase">Total Events</h4>
+                        <h2 class="text-3xl font-bold text-gray-800">{{ count.total_event }}</h2>
                     </div>
-                {% else %}
-                    <h2 class="max-w-80 mx-auto my-10 text-center justify-center text-yellow-400  text-lg sm:text-2xl font-bold">
-                        No events available for today!!
-                    </h2>
-                {% endif %}
+                    <div class="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-full">
+                        <!-- Calendar Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-6 h-6"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor"
+                             stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 4h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V9a2 2 0 012-2z" />
+                        </svg>
+                    </div>
+                </div>
             </div>
+            <!-- Upcoming Events -->
+            <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-center justify-between p-6">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-500 uppercase">Upcoming Events</h4>
+                        <h2 class="text-3xl font-bold text-gray-800">{{ count.total_upcoming }}</h2>
+                    </div>
+                    <div class="w-12 h-12 bg-yellow-500 text-white flex items-center justify-center rounded-full">
+                        <!-- Clock Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-6 h-6"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor"
+                             stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <!-- Past Events -->
+            <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                <div class="flex items-center justify-between p-6">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-500 uppercase">Past Events</h4>
+                        <h2 class="text-3xl font-bold text-gray-800">{{ count.total_past }}</h2>
+                    </div>
+                    <div class="w-12 h-12 bg-red-500 text-white flex items-center justify-center rounded-full">
+                        <!-- History Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-6 h-6"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor"
+                             stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% comment %} Charts {% endcomment %}
+        <!-- Chart Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 xl:mt-6">
+            <!-- Events Per Month Chart -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-lg font-semibold mb-4 text-center">📅 Events Per Month</h2>
+                <canvas id="eventsPerMonthChart"></canvas>
+            </div>
+            <!-- Events by Category Chart -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <h2 class="text-lg font-semibold mb-4 text-center">📊 Events by Category</h2>
+                <canvas id="eventsByCategoryChart"></canvas>
+            </div>
+        </div>
+        {% comment %} Events Scheduled For Today {% endcomment %}
+        <div class="my-4 xl:my-6 shadow-sm bg-white rounded-lg border border-gray-200 p-6">
+            <h2 class="text-xl sm:text-2xl font-semibold text-center text-gray-800 mb-6 border-b-2 border-orange-400 pb-2">
+                🎯 Events Scheduled for Today
+            </h2>
+            {% if todays_event %}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-600">
+                        <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+                            <tr>
+                                <th class="px-4 py-3">Title</th>
+                                <th class="px-4 py-3">Category</th>
+                                <th class="px-4 py-3">Location</th>
+                                <th class="px-4 py-3">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for event in todays_event %}
+                                <tr class="border-b hover:bg-gray-50 transition">
+                                    <td class="px-4 py-3 font-medium text-gray-900">{{ event.name }}</td>
+                                    <td class="px-4 py-3">{{ event.category.name }}</td>
+                                    <td class="px-4 py-3">{{ event.location }}</td>
+                                    <td class="px-4 py-3">{{ event.time }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center mt-8 text-yellow-500 font-semibold text-lg">🚫 No events scheduled for today.</div>
+            {% endif %}
         </div>
         {% comment %} Interactive Stats {% endcomment %}
         <div class="bg-white shadow-sm py-5 px-3 sm:px-10 rounded-md">
@@ -96,7 +169,7 @@
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ event.name }}
                                     </th>
-                                    <td class="px-6 py-4 min-w-80">{{ event.description }}</td>
+                                    <td class="px-6 py-4 min-w-80">{{ event.description|slice:":70" }}...</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ event.category.name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ event.location }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ event.date }}</td>

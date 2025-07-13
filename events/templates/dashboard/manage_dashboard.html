@@ -29,7 +29,7 @@
             </svg>
         </button>
         <aside id="default-sidebar"
-               class="fixed top-0 left-0 z-40 w-52 h-screen transition-transform -translate-x-full sm:translate-x-0"
+               class="fixed top-0 left-0 z-40 w-52 sm:w-60 h-screen transition-transform -translate-x-full sm:translate-x-0"
                aria-label="Sidebar">
             <div class="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2 font-medium">
@@ -147,8 +147,8 @@
                 </ul>
             </div>
         </aside>
-        <div class="p-4 bg-[#F4F7FD] sm:ml-56">
-            <div class="lg:p-4 rounded-lg">
+        <div class="p-4 xl:p-6 bg-[#F4F7FD] sm:ml-60">
+            <div class="rounded-lg">
                 {% block dashboard %}
                 {% endblock dashboard %}
                 {% block profile %}
@@ -166,4 +166,62 @@
             </div>
         </div>
     </body>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+  // Sample data from Django (pass from context)
+  const months = {{ months|safe }}; // Example: ['Jan', 'Feb', 'Mar']
+  const eventsCount = {{ events_count|safe }}; // Example: [5, 8, 3]
+
+  const categories = {{ categories|safe }}; // Example: ['Workshop', 'Seminar']
+  const categoryCount = {{ category_count|safe }}; // Example: [6, 4]
+
+  // Events Per Month Chart
+  new Chart(document.getElementById('eventsPerMonthChart'), {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Events',
+        data: eventsCount,
+        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+        borderColor: 'rgba(59, 130, 246, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  // Events By Category Chart
+  new Chart(document.getElementById('eventsByCategoryChart'), {
+    type: 'doughnut',
+    data: {
+      labels: categories,
+      datasets: [{
+        label: 'Events',
+        data: categoryCount,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)'
+        ],
+        borderColor: '#fff',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
+    </script>
 </html>
