@@ -18,7 +18,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-[#EFF3F8]">
-    <nav class="bg-white fixed w-full z-20 top-0 start-0 shadow-sm mb-10 border-gray-200">
+    <nav id="main-navbar"
+         class="{% if '/event-details/' in request.path %} bg-transparent text-white {% else %} bg-white text-black border-gray-200 shadow-sm{% endif %} transition-all ease-in-out duration-300 fixed w-full z-20 top-0 start-0">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
           <img class="w-52" src="{% static 'images/event-logo.png' %}" alt="logo">
@@ -41,35 +42,35 @@
         </div>
         <div class="items-center justify-end hidden w-full lg:flex lg:w-auto lg:order-1 overflow-hidden lg:max-h-full"
              id="navbar-sticky">
-          <ul class="flex flex-col items-center p-4 lg:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0 lg:bg-white">
+          <ul class="flex flex-col items-center p-4 lg:p-0 mt-4 font-medium rounded-lg lg:space-x-8 rtl:space-x-reverse lg:flex-row lg:mt-0 lg:border-0">
             <li>
               <a href="/"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Home</a>
+                 class="block py-2 px-3  md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Home</a>
             </li>
             <li>
               <a href="{% url "event-list" %}"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Events</a>
+                 class="block py-2 px-3 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Events</a>
             </li>
             <li>
               <a href="/#speaker"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Speaker</a>
+                 class="block py-2 px-3 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Speaker</a>
             </li>
             <li>
               <a href="/#about"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">About</a>
+                 class="block py-2 px-3 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">About</a>
             </li>
             <li>
               <a href="/#blog"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Blog</a>
+                 class="block py-2 px-3 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Blog</a>
             </li>
             <li>
               <a href="/#contact"
-                 class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Contact</a>
+                 class="block py-2 px-3 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Contact</a>
             </li>
             {% if user.is_authenticated %}
               <li>
                 <a href="{% url "dashboard" %}"
-                   class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Dashboard</a>
+                   class="block py-2 px-3  md:hover:bg-transparent hover:text-red-700 transition-colors duration-300 lg:p-0">Dashboard</a>
               </li>
               <li>
                 <img id="avatarButton"
@@ -122,13 +123,15 @@
     {% block header %}
     {% endblock header %}
     {% comment %} Event Info  {% endcomment %}
-    <main class="max-w-[1400px] px-3 mx-auto">
-      {% block event %}
-      {% endblock event %}
+    <main>
+      <div class="max-w-[1400px] px-3 mx-auto">
+        {% block event %}
+        {% endblock event %}
+        {% block form %}
+        {% endblock form %}
+      </div>
       {% block details %}
       {% endblock details %}
-      {% block form %}
-      {% endblock form %}
     </main>
     {% include "footer.html" %}
     {% comment %} Top scrolling fix button  {% endcomment %}
@@ -150,16 +153,33 @@
   <script>
     // get the current year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // navbar background color changed in details page
+    const navbar = document.getElementById("main-navbar");
     // scroll to top function
     const scrollTopButton = document.getElementById("scrollTopButton");
 
+    if (window.location.pathname.includes("/event-details/")) {
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          // Navbar style on scroll
+          navbar.classList.add("bg-white", "text-black");
+          navbar.classList.remove("bg-transparent", "text-white");
+        } else {
+          // Reset to transparent
+          navbar.classList.remove("bg-white", "text-black");
+          navbar.classList.add("bg-transparent", "text-white");
+        }
+      });
+    }
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 50) {
       scrollTopButton.classList.remove("opacity-0", "invisible", "bottom-0");
       scrollTopButton.classList.add("opacity-100", "visible", "bottom-8");
       } else {
         scrollTopButton.classList.remove("opacity-100", "visible", "bottom-8");
         scrollTopButton.classList.add("opacity-0", "invisible", "bottom-0");
+
       }
     })
 
