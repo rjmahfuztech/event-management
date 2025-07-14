@@ -4,6 +4,8 @@ from events.models import Event,Category
 from django.contrib import messages
 from datetime import date
 from django.db.models import Count,Q
+from django.utils.dateformat import DateFormat
+from django.db.models.functions import TruncMonth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_admin
@@ -99,6 +101,36 @@ def dashboard(request):
     else:
         events = events_query
 
+    # for bar chart
+    event_by_month = (
+        Event.objects.annotate(month=TruncMonth('date'))
+        .values('month')
+        .annotate(count=Count('id'))
+        .order_by('month')
+    )
+
+    months = []
+    event_counts = []
+
+    for item in event_by_month:
+        month = item['month']
+        month_name = DateFormat(month).format('M') # example: 'Jan', 'Feb', etc...
+        months.append(month_name)
+        event_counts.append(item['count'])
+    
+    # for pie chart
+    categories_with_event = Category.objects.prefetch_related('event').all()
+
+    categories = []
+    category_event_count = []
+
+    for category in categories_with_event:
+        categories.append(category.name)
+        if category.event.count() >= 1:
+            category_event_count.append(category.event.count())
+        else:
+            category_event_count.append(0)
+
     # pagination
     paginator = Paginator(events, 5)
     page_number = request.GET.get('page')
@@ -118,6 +150,10 @@ def dashboard(request):
         total_past=Count('id', filter=Q(date__lt=date.today())),
     )
     context ={
+        "months": months,
+        "event_counts": event_counts,
+        "categories": categories,
+        "category_event_count": category_event_count,
         "page_obj": page_obj,
         "query_string": query_string,
         "todays_event": todays_event,

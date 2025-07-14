@@ -168,60 +168,15 @@
     </body>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% comment %} Chart plugin for show the count {% endcomment %}
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script>
-  // Sample data from Django (pass from context)
-  const months = {{ months|safe }}; // Example: ['Jan', 'Feb', 'Mar']
-  const eventsCount = {{ events_count|safe }}; // Example: [5, 8, 3]
+        // dynamically data passing to the chart
+        const months = {{ months|safe }}; // Example: ['Jan', 'Feb', 'Mar']
+        const eventsCount = {{ event_counts|safe }}; // Example: [5, 8, 3]
 
-  const categories = {{ categories|safe }}; // Example: ['Workshop', 'Seminar']
-  const categoryCount = {{ category_count|safe }}; // Example: [6, 4]
-
-  // Events Per Month Chart
-  new Chart(document.getElementById('eventsPerMonthChart'), {
-    type: 'bar',
-    data: {
-      labels: months,
-      datasets: [{
-        label: 'Events',
-        data: eventsCount,
-        backgroundColor: 'rgba(59, 130, 246, 0.6)',
-        borderColor: 'rgba(59, 130, 246, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: { y: { beginAtZero: true } }
-    }
-  });
-
-  // Events By Category Chart
-  new Chart(document.getElementById('eventsByCategoryChart'), {
-    type: 'doughnut',
-    data: {
-      labels: categories,
-      datasets: [{
-        label: 'Events',
-        data: categoryCount,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)'
-        ],
-        borderColor: '#fff',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'bottom'
-        }
-      }
-    }
-  });
+        const categories = {{ categories|safe }}; // Example: ['Workshop', 'Seminar']
+        const categoryCount = {{ category_event_count|safe }}; // Example: [6, 4]
     </script>
+    <script src="{% static 'js/all.js' %}"></script>
 </html>

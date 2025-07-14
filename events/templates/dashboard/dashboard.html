@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-6">
             <!-- Total Participants -->
             <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-                <div class="flex items-center justify-between p-6">
+                <div class="flex items-center justify-between px-6 py-6 xl:py-9">
                     <div>
                         <h4 class="text-sm font-medium text-gray-500 uppercase">Total Participants</h4>
                         <h2 class="text-3xl font-bold text-gray-800">{{ total_participant }}</h2>
@@ -24,7 +24,7 @@
             </div>
             <!-- Total Events -->
             <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-                <div class="flex items-center justify-between p-6">
+                <div class="flex items-center justify-between px-6 py-6 xl:py-9">
                     <div>
                         <h4 class="text-sm font-medium text-gray-500 uppercase">Total Events</h4>
                         <h2 class="text-3xl font-bold text-gray-800">{{ count.total_event }}</h2>
@@ -44,7 +44,7 @@
             </div>
             <!-- Upcoming Events -->
             <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-                <div class="flex items-center justify-between p-6">
+                <div class="flex items-center justify-between px-6 py-6 xl:py-9">
                     <div>
                         <h4 class="text-sm font-medium text-gray-500 uppercase">Upcoming Events</h4>
                         <h2 class="text-3xl font-bold text-gray-800">{{ count.total_upcoming }}</h2>
@@ -64,7 +64,7 @@
             </div>
             <!-- Past Events -->
             <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-                <div class="flex items-center justify-between p-6">
+                <div class="flex items-center justify-between px-6 py-6 xl:py-9">
                     <div>
                         <h4 class="text-sm font-medium text-gray-500 uppercase">Past Events</h4>
                         <h2 class="text-3xl font-bold text-gray-800">{{ count.total_past }}</h2>
@@ -85,16 +85,20 @@
         </div>
         {% comment %} Charts {% endcomment %}
         <!-- Chart Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 xl:mt-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-6 mt-4 xl:mt-6">
             <!-- Events Per Month Chart -->
-            <div class="bg-white p-6 rounded-lg shadow-sm">
+            <div class="bg-white p-6 rounded-lg shadow-sm xl:col-span-2">
                 <h2 class="text-lg font-semibold mb-4 text-center">📅 Events Per Month</h2>
-                <canvas id="eventsPerMonthChart"></canvas>
+                <div class="relative min-h-[250px] max-h-[330px] lg:min-h-[300px] xl:max-h-[400px] h-full w-full">
+                    <canvas id="eventsPerMonthChart" class="w-full h-full"></canvas>
+                </div>
             </div>
             <!-- Events by Category Chart -->
             <div class="bg-white p-6 rounded-lg shadow-sm">
                 <h2 class="text-lg font-semibold mb-4 text-center">📊 Events by Category</h2>
-                <canvas id="eventsByCategoryChart"></canvas>
+                <div class="relative min-h-[250px] max-h-[330px] lg:min-h-[300px] xl:max-h-[400px] h-full w-full flex justify-center">
+                    <canvas id="eventsByCategoryChart" class="w-full h-full"></canvas>
+                </div>
             </div>
         </div>
         {% comment %} Events Scheduled For Today {% endcomment %}
