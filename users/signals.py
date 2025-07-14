@@ -11,7 +11,8 @@ User = get_user_model()
 def send_account_activation_mail(sender, instance, created, **kwargs):
     if created:
         token = default_token_generator.make_token(instance)
-        activation_url = f"{settings.FRONTEND_URL}/users/activate/{instance.id}/{token}/"
+        # activation_url = f"{settings.FRONTEND_URL}/users/activate/{instance.id}/{token}/"
+        activation_url = f"http://127.0.0.1:8000/users/activate/{instance.id}/{token}/"
 
         subject = 'Activate Your Account'
         message = f"Hello, {instance.username}\n\n Please activate your account by clicking the link below:\n{activation_url}\n\nThank You."
