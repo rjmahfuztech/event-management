@@ -1,0 +1,52 @@
+{% load static %}
+<h3 class="text-2xl md:text-3xl font-semibold mb-8">Related Events</h3>
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper h-[400px] pb-14 md:pb-20">
+    {% for event in related_events %}
+      <div class="swiper-slide">
+        <div class="group bg-white border border-gray-200 rounded-lg shadow-sm text-base">
+          <div class="overflow-hidden relative rounded-t-lg">
+            {% if event.image %}
+              <img class="!h-[250px] w-full group-hover:scale-105 transition-transform duration-500 object-cover"
+                   src="{{ event.image.url }}"
+                   alt="Image" />
+            {% else %}
+              <img class="!h-[250px] w-full group-hover:scale-105 transition-transform duration-500 object-cover"
+                   src="{% static 'images/event-img.jpeg' %}"
+                   alt="Image" />
+            {% endif %}
+            <p class="flex items-center gap-2 bg-red-700 font-medium rounded-tr-lg rounded-bl-lg px-3 py-1 text-white absolute top-0 right-0">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke-width="1.5"
+                   stroke="currentColor"
+                   class="size-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+              </svg>
+              {{ event.date }}
+            </p>
+          </div>
+          <div class="p-5 !relative overflow-hidden">
+            <div class="ml-7">
+              <h5 class="mb-2 text-xl text-center lg:text-2xl font-bold tracking-tight text-gray-900 group-hover:text-red-600 transition-colors duration-300">
+                {{ event.name }}
+              </h5>
+              <p class="mb-3 font-normal text-center text-gray-700">{{ event.description|slice:"0:40" }}...</p>
+              <div class="mt-5 text-center">
+                <a href="{% url "details" event.id %}"
+                   class="underline text-red-600 font-semibold">SEE DETAILS</a>
+              </div>
+            </div>
+            <div class="!absolute bottom-0 rounded-tl-lg !right-0 left-8 -rotate-90 origin-bottom-left bg-red-700 text-white px-2 pl-9 py-1 font-semibold">
+              <div class="flex items-center gap-1 text-center">
+                <span>Participant:</span> <span class="font-semibold mt-1">{{ event.participant.count }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper-pagination"></div>
+</div>

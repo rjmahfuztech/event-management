@@ -20,7 +20,7 @@ html {
   border-radius: 9px;
   position: relative;
 }
-.swiper-slide img {
+.swiper-slide > .speaker-img {
   display: block;
   width: 100%;
   height: 100%;

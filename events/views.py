@@ -83,8 +83,18 @@ class CustomEventDetailsView(DetailView):
     context_object_name = 'details'
 
     def get_queryset(self):
-        queryset = Event.objects.prefetch_related('participant')
-        return queryset
+        return Event.objects.prefetch_related('participant')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_event = self.object
+
+        # get related events that are in same category and exclude current event
+        related_events = Event.objects.filter(category=current_event.category).exclude(id=current_event.id)
+
+        context['related_events'] = related_events
+        return context
+        
 
 @login_required
 def dashboard(request):
