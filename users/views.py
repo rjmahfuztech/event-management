@@ -94,6 +94,10 @@ def assign_role(request, id):
     user = User.objects.get(id=id)
     form = AssignRoleForm()
     if request.method == 'POST':
+        if user.username == 'admin':
+            messages.error(request, f"'{user.first_name + " " + user.last_name}' as a Admin you can't change your role")
+            return redirect('participant')
+            
         form = AssignRoleForm(request.POST)
         if form.is_valid():
             role = form.cleaned_data.get('role')

@@ -280,6 +280,11 @@ def user_booked_events(request):
 def delete_participant(request,id):
     participant = User.objects.get(id=id)
     if request.method == "POST":
+        # this 3 user can't delete. because it's important for test
+        if participant.username == 'admin' or 'organizer' or 'user':
+            messages.error(request, f"You can't delete '{participant.first_name + " " + participant.last_name}'. This user is important!")
+            return redirect('participant')
+        
         participant.delete()
         messages.success(request, "Participant Deleted Successful!")
         return redirect('participant')

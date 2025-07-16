@@ -85,22 +85,24 @@
         </div>
         {% comment %} Charts {% endcomment %}
         <!-- Chart Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-6 mt-4 xl:mt-6">
-            <!-- Events Per Month Chart -->
-            <div class="bg-white p-6 rounded-lg shadow-sm xl:col-span-2">
-                <h2 class="text-lg font-semibold mb-4 text-center">📅 Events Per Month</h2>
-                <div class="relative min-h-[250px] max-h-[330px] lg:min-h-[300px] xl:max-h-[400px] h-full w-full">
-                    <canvas id="eventsPerMonthChart" class="w-full h-full"></canvas>
+        {% if user.groups.first.name != 'User' %}
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-6 mt-4 xl:mt-6">
+                <!-- Events Per Month Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-sm xl:col-span-2">
+                    <h2 class="text-lg font-semibold mb-4 text-center">📅 Events Per Month</h2>
+                    <div class="relative min-h-[250px] max-h-[330px] lg:min-h-[300px] xl:max-h-[400px] h-full w-full">
+                        <canvas id="eventsPerMonthChart" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+                <!-- Events by Category Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-lg font-semibold mb-4 text-center">📊 Events by Category</h2>
+                    <div class="relative min-h-[250px] max-h-[330px] lg:min-h-[300px] xl:max-h-[400px] h-full w-full flex justify-center">
+                        <canvas id="eventsByCategoryChart" class="w-full h-full"></canvas>
+                    </div>
                 </div>
             </div>
-            <!-- Events by Category Chart -->
-            <div class="bg-white p-6 rounded-lg shadow-sm">
-                <h2 class="text-lg font-semibold mb-4 text-center">📊 Events by Category</h2>
-                <div class="relative min-h-[250px] max-h-[330px] lg:min-h-[300px] xl:max-h-[400px] h-full w-full flex justify-center">
-                    <canvas id="eventsByCategoryChart" class="w-full h-full"></canvas>
-                </div>
-            </div>
-        </div>
+        {% endif %}
         {% comment %} Events Scheduled For Today {% endcomment %}
         <div class="my-4 xl:my-6 shadow-sm bg-white rounded-lg border border-gray-200 p-6">
             <h2 class="text-xl sm:text-2xl font-semibold text-center text-gray-800 mb-6 border-b-2 border-orange-400 pb-2">
