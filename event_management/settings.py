@@ -16,7 +16,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com', 'http://127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'https://*.onrender.com', 'http://127.0.0.1:8000']
 
 # CustomUser
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -126,6 +126,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
