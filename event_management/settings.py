@@ -1,6 +1,7 @@
 from pathlib import Path
 import dj_database_url
 from decouple import config
+import cloudinary
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +26,15 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'events',
     'debug_toolbar',
     'users',
@@ -87,8 +91,18 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 
 # PostgreSQL
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL'),
+        conn_max_age=600)
 }
+
+# Cloudinary Storage for media files
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('cloud_name'),
+    'API_KEY': config('cloud_api_key'),
+    'API_SECRET': config('cloud_api_secret')
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 AUTH_PASSWORD_VALIDATORS = [
