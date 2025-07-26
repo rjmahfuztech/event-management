@@ -167,7 +167,7 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-FRONTEND_URL = 'https://event-manager-ie3m.onrender.com'
+FRONTEND_URL = 'https://event-manager1.up.railway.app/'
 
 LOGIN_URL = '/users/sign-in/'
 LOGIN_REDIRECT_URL = '/dashboard/'
