@@ -1,1 +1,1 @@
-web: gunicorn event_management.wsgi --bind 0.0.0.0:$PORT
+web: python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn event_management.wsgi --log-file - --bind 0.0.0.0:$PORT
