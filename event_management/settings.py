@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app', 'https://*.onrender.com', 'http://127.0.0.1:8000']
@@ -96,6 +96,13 @@ DATABASES = {
         conn_max_age=600)
 }
 
+# Cloudinary
+cloudinary.config(
+    cloud_name=config('cloud_name'),
+    api_key=config('cloud_api_key'),
+    api_secret=config('cloud_api_secret'),
+    secure=True
+)
 # Cloudinary Storage for media files
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': config('cloud_name'),
