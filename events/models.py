@@ -28,3 +28,19 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class Speaker(models.Model):
+    name = models.CharField(max_length=200)
+    designation = models.CharField(max_length=350)
+    bio = models.TextField(blank=True)
+    photo = CloudinaryField('Picture', folder='speaker_photo', blank=True, null=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='speakers')
+    facebook = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null=True)
+    instagram = models.URLField(blank=True, null=True)
+    x = models.URLField(blank=True, null=True)
+    whatsapp = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name

@@ -1,5 +1,5 @@
 from django import forms
-from events.models import Event,Category
+from events.models import Event,Category, Speaker
 
 class StyleMixin():
     form_style_classes = 'border border-gray-500 p-2 rounded-md w-full mb-2'
@@ -68,3 +68,9 @@ class CategoryModelForm(StyleMixin,forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name', 'description']
+
+
+class SpeakerModelForm(StyleMixin, forms.ModelForm):
+    class Meta:
+        model = Speaker
+        fields = ['name', 'designation', 'bio', 'photo', 'facebook', 'linkedin', 'x', 'instagram', 'whatsapp']

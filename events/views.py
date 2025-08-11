@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from events.forms import EventModelForm,CategoryModelForm
-from events.models import Event,Category
+from events.forms import EventModelForm,CategoryModelForm, SpeakerModelForm
+from events.models import Event,Category, Speaker
 from django.contrib import messages
 from datetime import date
 from django.db.models import Count,Q
@@ -9,7 +9,7 @@ from django.db.models.functions import TruncMonth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_admin
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, ListView
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator
 User = get_user_model()
@@ -349,3 +349,10 @@ def delete_category(request,id):
     else:
         messages.error(request, 'Opps! Something Went Wrong! Event Delete Failed!')
         return redirect('category')
+    
+
+# Speaker
+class SpeakerListView(ListView):
+    model = Speaker
+    template_name = 'event_info.html'
+    context_object_name = 'speakers'
