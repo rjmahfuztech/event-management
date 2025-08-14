@@ -1,0 +1,362 @@
+[
+  {
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+      "name": "Summer Beats Concert",
+      "description": "A high-energy evening featuring live bands and guest DJs on an outdoor stage, with quality sound, food stalls, and chill zones. Expect diverse genres, surprise collaborations, and a safe, inclusive crowd experience.",
+      "date": "2025-09-19",
+      "time": "19:00:00",
+      "location": "Central Park Amphitheater",
+      "category_id": 1
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 2,
+    "fields": {
+      "name": "Jazz & Soul Night",
+      "description": "A smooth blend of classic jazz standards and modern soul interpretations, performed by seasoned musicians. Seating is cozy, lighting warm, and the setlist designed for deep listening and relaxed conversation.",
+      "date": "2025-10-02",
+      "time": "19:30:00",
+      "location": "Blue Note Club",
+      "category_id": 1
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 3,
+    "fields": {
+      "name": "Indie Rock Festival",
+      "description": "Experience the best of independent rock music with a lineup of emerging and established bands. Multiple stages, unique vendors, and a vibrant atmosphere.",
+      "date": "2025-10-15",
+      "time": "15:00:00",
+      "location": "Riverfront Park",
+      "category_id": 1
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 4,
+    "fields": {
+      "name": "Classical Symphony Gala",
+      "description": "An elegant evening of classical music performed by the city's philharmonic orchestra. Featuring masterpieces from legendary composers in a grand concert hall setting.",
+      "date": "2025-11-05",
+      "time": "20:00:00",
+      "location": "The Grand Opera House",
+      "category_id": 1
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 5,
+    "fields": {
+      "name": "Hip-Hop Showcase",
+      "description": "A dynamic showcase of local and national hip-hop artists, featuring live performances, DJ sets, and freestyle battles. Celebrating the culture and creativity of the genre.",
+      "date": "2025-11-20",
+      "time": "21:00:00",
+      "location": "The Warehouse Venue",
+      "category_id": 1
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 6,
+    "fields": {
+      "name": "Rock & Roll Revival Night",
+      "description": "Travel back in time with a night dedicated to classic rock and roll. Live bands covering hits from the 50s, 60s, and 70s, with a dance floor and themed drinks.",
+      "date": "2025-12-10",
+      "time": "19:00:00",
+      "location": "Retro Lounge",
+      "category_id": 1
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 7,
+    "fields": {
+      "name": "City Marathon",
+      "description": "Run through the city's scenic streets in this annual marathon event. Open to professional athletes and enthusiastic amateurs, with different race categories for all fitness levels.",
+      "date": "2025-09-25",
+      "time": "07:00:00",
+      "location": "Downtown Starting Line",
+      "category_id": 2
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 8,
+    "fields": {
+      "name": "Basketball Championship Finals",
+      "description": "Witness the thrilling conclusion of the regional basketball season. The two best teams will face off for the championship title in a high-stakes, action-packed game.",
+      "date": "2025-10-08",
+      "time": "20:00:00",
+      "location": "City Arena",
+      "category_id": 2
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 9,
+    "fields": {
+      "name": "Community Soccer Tournament",
+      "description": "A weekend-long soccer tournament bringing together local teams and fans. Enjoy friendly competition, food vendors, and family-friendly activities.",
+      "date": "2025-10-22",
+      "time": "10:00:00",
+      "location": "Greenfield Sports Complex",
+      "category_id": 2
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 10,
+    "fields": {
+      "name": "Boxing Night",
+      "description": "An exciting night of professional boxing, featuring a main event title fight and several undercard bouts. Feel the energy of the crowd as fighters compete for glory.",
+      "date": "2025-11-12",
+      "time": "21:30:00",
+      "location": "The Coliseum",
+      "category_id": 2
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 11,
+    "fields": {
+      "name": "Yoga in the Park",
+      "description": "Find your inner peace with a refreshing morning yoga session held outdoors. Suitable for all skill levels, guided by experienced instructors, followed by a healthy brunch.",
+      "date": "2025-11-28",
+      "time": "08:00:00",
+      "location": "Sunset Park",
+      "category_id": 2
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 12,
+    "fields": {
+      "name": "Extreme Sports Expo",
+      "description": "An adrenaline-fueled expo showcasing extreme sports athletes and gear. Watch demonstrations of skateboarding, BMX, and parkour, and try some activities yourself.",
+      "date": "2025-12-15",
+      "time": "11:00:00",
+      "location": "The Waterfront Pavilion",
+      "category_id": 2
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 13,
+    "fields": {
+      "name": "Global Tech Summit",
+      "description": "A premier conference for tech enthusiasts and professionals. Keynote speeches from industry leaders, workshops on cutting-edge technologies, and networking opportunities.",
+      "date": "2025-10-01",
+      "time": "09:00:00",
+      "location": "Innovation Convention Center",
+      "category_id": 3
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 14,
+    "fields": {
+      "name": "Hackathon for Social Good",
+      "description": "A 24-hour hackathon focused on developing innovative solutions for community challenges. Teams of developers, designers, and project managers will compete for prizes.",
+      "date": "2025-10-18",
+      "time": "18:00:00",
+      "location": "The Tech Hub",
+      "category_id": 3
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 15,
+    "fields": {
+      "name": "Future of AI Workshop",
+      "description": "An interactive workshop exploring the latest trends and applications of artificial intelligence. Hands-on sessions with machine learning models and expert-led discussions.",
+      "date": "2025-11-03",
+      "time": "14:00:00",
+      "location": "Digital Lab",
+      "category_id": 3
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 16,
+    "fields": {
+      "name": "Cybersecurity Conference",
+      "description": "A conference dedicated to cybersecurity, with talks on new threats, defensive strategies, and best practices. Ideal for IT professionals and anyone interested in digital security.",
+      "date": "2025-11-19",
+      "time": "09:30:00",
+      "location": "The Security Institute",
+      "category_id": 3
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 17,
+    "fields": {
+      "name": "Startup Pitch Night",
+      "description": "Local startups present their innovative ideas to a panel of investors and the public. A great opportunity for networking and discovering the next big thing.",
+      "date": "2025-12-07",
+      "time": "18:30:00",
+      "location": "Venture Hall",
+      "category_id": 3
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 18,
+    "fields": {
+      "name": "Game Dev Convention",
+      "description": "Explore the world of video game development with showcases of new games, developer panels, and workshops on game design, art, and coding.",
+      "date": "2025-12-21",
+      "time": "10:00:00",
+      "location": "Convention Center",
+      "category_id": 3
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 19,
+    "fields": {
+      "name": "Public Speaking Workshop",
+      "description": "Improve your communication skills with a comprehensive workshop on public speaking. Learn to overcome stage fright, structure presentations, and engage an audience.",
+      "date": "2025-09-28",
+      "time": "10:00:00",
+      "location": "Community Center Hall",
+      "category_id": 4
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 20,
+    "fields": {
+      "name": "Coding for Beginners",
+      "description": "An introductory course to the fundamentals of programming. Perfect for those with no prior experience, covering basic concepts and hands-on projects.",
+      "date": "2025-10-10",
+      "time": "18:00:00",
+      "location": "The Learning Center",
+      "category_id": 4
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 21,
+    "fields": {
+      "name": "Financial Literacy Seminar",
+      "description": "A seminar designed to help you take control of your finances. Topics include budgeting, investing, saving, and managing debt with advice from financial experts.",
+      "date": "2025-10-26",
+      "time": "11:00:00",
+      "location": "City Library Auditorium",
+      "category_id": 4
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 22,
+    "fields": {
+      "name": "Creative Writing Class",
+      "description": "Unleash your creativity in this class focused on creative writing techniques. Learn about character development, plot structure, and effective storytelling.",
+      "date": "2025-11-09",
+      "time": "14:00:00",
+      "location": "The Writer's Hub",
+      "category_id": 4
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 23,
+    "fields": {
+      "name": "Digital Marketing Masterclass",
+      "description": "A deep dive into the world of digital marketing. Learn about SEO, social media strategies, content creation, and analytics to boost your brand.",
+      "date": "2025-11-25",
+      "time": "17:00:00",
+      "location": "Marketing Solutions HQ",
+      "category_id": 4
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 24,
+    "fields": {
+      "name": "Language Exchange Meetup",
+      "description": "Practice new languages with native speakers in a relaxed, friendly environment. A great way to improve your skills and meet people from different cultures.",
+      "date": "2025-12-18",
+      "time": "19:00:00",
+      "location": "The Global Cafe",
+      "category_id": 4
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 25,
+    "fields": {
+      "name": "Modern Art Exhibition",
+      "description": "Explore a stunning collection of contemporary paintings, sculptures, and installations by renowned and emerging artists. A visual journey through modern creativity.",
+      "date": "2025-09-30",
+      "time": "10:00:00",
+      "location": "The City Gallery",
+      "category_id": 5
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 26,
+    "fields": {
+      "name": "Photography Workshop",
+      "description": "Learn the art of photography from a professional. This workshop covers composition, lighting, editing, and using your camera to capture stunning images.",
+      "date": "2025-10-13",
+      "time": "13:00:00",
+      "location": "Studio 55",
+      "category_id": 5
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 27,
+    "fields": {
+      "name": "Pottery Class",
+      "description": "Get your hands dirty and learn the basics of pottery. Create your own bowls, mugs, and vases in a guided, hands-on session with all materials provided.",
+      "date": "2025-10-29",
+      "time": "15:00:00",
+      "location": "Clay Works Studio",
+      "category_id": 5
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 28,
+    "fields": {
+      "name": "Street Art Tour",
+      "description": "Discover the vibrant street art scene of the city on a guided walking tour. Learn about the artists, their techniques, and the stories behind their murals.",
+      "date": "2025-11-16",
+      "time": "12:00:00",
+      "location": "The Art District",
+      "category_id": 5
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 29,
+    "fields": {
+      "name": "Film Screening & Q&A",
+      "description": "Watch an independent film followed by a Q&A session with the director and cast. A unique opportunity to gain insights into the filmmaking process.",
+      "date": "2025-12-04",
+      "time": "20:30:00",
+      "location": "Indie Cinema",
+      "category_id": 5
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 30,
+    "fields": {
+      "name": "Sculpture Garden Opening",
+      "description": "Celebrate the grand opening of a new public sculpture garden. Featuring large-scale works from international sculptors in a beautifully landscaped outdoor space.",
+      "date": "2025-12-20",
+      "time": "11:00:00",
+      "location": "Botanical Gardens",
+      "category_id": 5
+    }
+  }
+]

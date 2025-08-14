@@ -1,0 +1,42 @@
+[
+  {
+    "model": "events.category",
+    "pk": 1,
+    "fields": {
+      "name": "Music",
+      "description": "Live concerts, band performances, and musical festivals."
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 2,
+    "fields": {
+      "name": "Sports",
+      "description": "Matches, tournaments, and sports-related events."
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 3,
+    "fields": {
+      "name": "Technology",
+      "description": "Tech conferences, hackathons, and innovation fairs."
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 4,
+    "fields": {
+      "name": "Education",
+      "description": "Workshops, training sessions, and educational events."
+    }
+  },
+  {
+    "model": "events.category",
+    "pk": 5,
+    "fields": {
+      "name": "Art",
+      "description": "Art exhibitions, painting shows, and cultural programs."
+    }
+  }
+]
